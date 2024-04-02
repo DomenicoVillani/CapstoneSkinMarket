@@ -1,0 +1,50 @@
+﻿@model CapstoneSkinMarket.Models.Orders
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalePrezzo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalePrezzo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataOrdine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataOrdine)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrdineID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapstoneSkinMarket", "CapstoneSkinMarket.csproj", "{55F48FB7-203F-4E25-9C7E-5AE9B72935AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55F48FB7-203F-4E25-9C7E-5AE9B72935AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F48FB7-203F-4E25-9C7E-5AE9B72935AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F48FB7-203F-4E25-9C7E-5AE9B72935AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F48FB7-203F-4E25-9C7E-5AE9B72935AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97EC6E1F-6C6E-460D-95CA-AC51B6B292BB}
+	EndGlobalSection
+EndGlobal
