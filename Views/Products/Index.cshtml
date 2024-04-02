@@ -9,55 +9,33 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Games.NomeGioco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Immagine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descrizione)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rarita)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Games.NomeGioco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Immagine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descrizione)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prezzo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rarita)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArticoloID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ArticoloID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArticoloID })
-        </td>
-    </tr>
+@{
+    var groupedByGameName = Model.GroupBy(p => p.Games.NomeGioco).OrderBy(g => g.Key);
 }
 
-</table>
+@foreach (var gameGroup in groupedByGameName)
+{
+    <h2>@gameGroup.Key</h2>
+
+    <div class="row">
+        @foreach (var item in gameGroup)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <p class="card-title">@item.Nome</p>
+                        <p class="card-text">@item.Games.NomeGioco</p>
+                        <p class="card-text">@item.Descrizione</p>
+                        <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                        <p class="card-text">@item.Rarita</p>
+                        <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                        <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
