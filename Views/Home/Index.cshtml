@@ -1,26 +1,98 @@
-﻿<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="aspnetTitle">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-            a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-            is an ideal platform for building RESTful applications on the .NET Framework.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-        </section>>
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .carousel-item img {
+        width: 100%; /* Garantisce che le immagini si adattino alla larghezza del contenitore del carosello */
+        height: 100%; /* Mantiene il rapporto d'aspetto dell'immagine */
+        object-fit: cover; /* Evita distorsioni assicurando che l'immagine copra l'area disponibile */
+    }
+
+    .carousel {
+        max-width: 600px; /* Limita la larghezza massima del carosello, adattalo alle tue necessità */
+        height: 400px;
+        margin: auto; /* Centra il carosello se ha una larghezza max */
+    }
+
+    .carousel-item {
+        transition: transform 1s ease;
+        transform: scale(1); /* Impedisce l'ingrandimento */
+    }
+
+    body{
+        background-color:aqua;
+    }
+
+    @@media (min-width: 991px){
+        .div-25{
+            width:25%;
+        }
+    }
+</style>
+<body>
+    <h1>Benvenuto in SkinBazaar!</h1>
+    <p>Entra in un mondo dove lo stile virtuale si fonde con l'avventura digitale! SkinBazaar è il luogo in cui i giocatori più esigenti trovano le skin più trendy</p>
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start">
+        <div class="div-25">
+            <h2>Esplora la Nostra Vasta Selezione di Skin</h2>
+            <p>Sfoglia la nostra vasta collezione di skin, abbiamo tutto ciò di cui hai bisogno per dare un tocco unico al tuo gameplay.</p>
+        </div>
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Stile/Img/akcs2.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/DoppieBerettecs2.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/m4cs2.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/skinDesertcs2.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/usp2cs2.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/akcs22.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/xm1014.png" class="d-block" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Stile/Img/Uspcs2.png" class="d-block" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
-</main>
+    <div class="d-flex flex-column flex-md-row">
+        <div>
+            <h2>Stile e Qualità Garantiti</h2>
+            <p>La qualità è la nostra priorità principale. Ogni skin nel nostro inventario è stata accuratamente selezionata per garantire stile e prestazioni impeccabili. Non accontentarti di meno con SkinBazaar, hai accesso solo alle migliori skin disponibili sul mercato.</p>
+        </div>
+        <div>
+            <h2>Assistenza Clienti Dedicata</h2>
+            <p>Il nostro team di assistenza clienti è qui per aiutarti in ogni fase del tuo viaggio con SkinBazaar. Dai consigli sulla scelta delle skin alla risoluzione dei problemi tecnici, siamo sempre pronti ad aiutarti.</p>
+        </div>
+    </div>
+    <h2>Entra nel Mondo di SkinBazaar Oggi!</h2>
+    <p>Non aspettare altro tempo per dare al tuo personaggio un tocco di stile unico. Unisciti alla nostra community di giocatori appassionati e inizia a esplorare le possibilità infinite di personalizzazione con SkinBazaar.</p>
+    <div class="d-none d-md-flex flex-row justify-content-evenly align-items-center">
+        <div>
+            <img src="~/Stile/Img/joinus.png"/>
+        </div>
+        <div>
+            <img src="~/Stile/Img/contact.png" class="img-fluid" width="500"/>
+        </div>
+    </div>
+</body>
