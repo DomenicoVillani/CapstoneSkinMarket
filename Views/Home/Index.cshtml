@@ -89,10 +89,25 @@
     <p>Non aspettare altro tempo per dare al tuo personaggio un tocco di stile unico. Unisciti alla nostra community di giocatori appassionati e inizia a esplorare le possibilità infinite di personalizzazione con SkinBazaar.</p>
     <div class="d-none d-md-flex flex-row justify-content-evenly align-items-center">
         <div>
-            <img src="~/Stile/Img/joinus.png"/>
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Index", "Products")">
+                    <img src="~/Stile/Img/buyNow.png" />
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Auth")">
+                    <img src="~/Stile/Img/joinus.png" alt="Unisciti a noi" />
+                </a>
+            }
         </div>
+
         <div>
-            <img src="~/Stile/Img/contact.png" class="img-fluid" width="500"/>
+            <a href="@Url.Action("Contattaci", "Footer")">
+                <img src="~/Stile/Img/contact.png" class="img-fluid" width="500" />
+            </a>
+
         </div>
     </div>
 </body>

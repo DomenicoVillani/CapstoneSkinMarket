@@ -49,10 +49,10 @@ namespace CapstoneSkinMarket.Models
 
         [Required]
         [StringLength(10)]
-        public string Ruolo { get; set; }
+        public string Ruolo { get; set; } = "User";
 
         [Column(TypeName = "image")]
-        public byte[] ImmagineProfilo { get; set; }
+        public byte[] ImmagineProfilo { get; set; } = null;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

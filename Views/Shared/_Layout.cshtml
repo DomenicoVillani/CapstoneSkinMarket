@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
@@ -13,17 +13,35 @@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                <img src="~/Stile/Img/Gemini_Generated_Image.jpeg" alt="Logo" class="navbar-logo rounded-circle" width="50" height="50"/> 
+                <img src="~/Stile/Img/Gemini_Generated_Image.jpeg" alt="Logo" class="navbar-logo rounded-circle" width="50" height="50" />
             </a>
-            
+
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li> 
+                    }
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Logout", "Auth")" class="btn btn-outline-light pacifico-regular">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Login", "Auth")" class="btn btn-outline-light pacifico-regular">Login</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -32,7 +50,18 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - SkinBazaar</p>
+            <div class="row">
+                <div class="col-2">
+                    <a href="@Url.Action("Chisiamo", "Footer")">Chi siamo</a>
+                </div>
+                <div class="col-2 offset-2">
+                    <a href="@Url.Action("DoveTrovarci", "Footer")">Dove Trovarci</a>
+                </div>
+                <div class="col-2 offset-2">
+                    <a href="@Url.Action("Contattaci", "Footer")">Contattaci</a>
+                </div>
+            </div>
         </footer>
     </div>
 

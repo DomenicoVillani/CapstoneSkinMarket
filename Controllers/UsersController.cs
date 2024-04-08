@@ -42,21 +42,36 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // POST: Users/Create
-        // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono,Ruolo,ImmagineProfilo")] Users users)
+        public ActionResult Create([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono")] Users users)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Users.Add(users);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var errorList = ModelState
+                                .Where(x => x.Value.Errors.Count > 0)
+                                .Select(x => new { x.Key, Errors = x.Value.Errors.Select(y => y.ErrorMessage).ToArray() })
+                                .ToArray();
             }
 
+            if (ModelState.IsValid)
+            {
+                var userDb = db.Users.FirstOrDefault(u => u.Email == users.Email);
+                if (userDb == null)
+                {
+                    db.Users.Add(users);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["message"] = "L'email esiste già";
+                    return View(users);
+                }
+            }
             return View(users);
         }
+
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
