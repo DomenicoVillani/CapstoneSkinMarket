@@ -4,38 +4,99 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
 
 @{
     var groupedByGameName = Model.GroupBy(p => p.Games.NomeGioco).OrderBy(g => g.Key);
 }
 
-@foreach (var gameGroup in groupedByGameName)
+@if (User.IsInRole("Admin"))
 {
-    <h2>@gameGroup.Key</h2>
+    <h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    foreach (var gameGroup in groupedByGameName)
+    {
+        <h2>@gameGroup.Key</h2>
 
-    <div class="row">
-        @foreach (var item in gameGroup)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="@item.Immagine" class="card-img-top" alt="Product Image">
-                    <div class="card-body">
-                        <p class="card-title">@item.Nome</p>
-                        <p class="card-text">@item.Games.NomeGioco</p>
-                        <p class="card-text">@item.Descrizione</p>
-                        <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                        <p class="card-text">@item.Rarita</p>
-                        <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
-                        <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                        <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+        <div class="row">
+            @foreach (var item in gameGroup)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <p class="card-title">@item.Nome</p>
+                            <p class="card-text">@item.Games.NomeGioco</p>
+                            <p class="card-text">@item.Descrizione</p>
+                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                            <p class="card-text">@item.Rarita</p>
+                            <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
+                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
+    }
 }
+else if (User.IsInRole("User"))
+{
+    <h2>Index</h2>
+    foreach (var gameGroup in groupedByGameName)
+    {
+        <h2>@gameGroup.Key</h2>
+
+        <div class="row">
+            @foreach (var item in gameGroup)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <p class="card-title">@item.Nome</p>
+                            <p class="card-text">@item.Games.NomeGioco</p>
+                            <p class="card-text">@item.Descrizione</p>
+                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                            <p class="card-text">@item.Rarita</p>
+                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            <p>AGGIUNGI AL CARRELLO DA FARE</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+else
+{
+    <h2>Loggati per poter inserire i prodotti nel carrello</h2>
+    foreach (var gameGroup in groupedByGameName)
+    {
+        <h2>@gameGroup.Key</h2>
+
+        <div class="row">
+            @foreach (var item in gameGroup)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <p class="card-title">@item.Nome</p>
+                            <p class="card-text">@item.Games.NomeGioco</p>
+                            <p class="card-text">@item.Descrizione</p>
+                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                            <p class="card-text">@item.Rarita</p>
+                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+

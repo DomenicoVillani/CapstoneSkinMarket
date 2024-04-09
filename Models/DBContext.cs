@@ -16,6 +16,7 @@ namespace CapstoneSkinMarket.Models
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<OrdersProducts> OrdersProducts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,10 +37,18 @@ namespace CapstoneSkinMarket.Models
                 .Property(e => e.Note)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Orders>()
-                .HasMany(e => e.Products)
-                .WithMany(e => e.Orders)
-                .Map(m => m.ToTable("OrdersProducts").MapLeftKey("OrdineID").MapRightKey("ArticoloID"));
+            modelBuilder.Entity<OrdersProducts>()
+                .HasKey(e => new { e.ArticoloID, e.OrdineID });
+
+            modelBuilder.Entity<OrdersProducts>()
+                .HasRequired(op => op.Products)
+                .WithMany(p => p.OrdersProducts)
+                .HasForeignKey(op => op.ArticoloID);
+
+            modelBuilder.Entity<OrdersProducts>()
+                .HasRequired(op => op.Orders)
+                .WithMany(o => o.OrdersProducts)
+                .HasForeignKey(op => op.OrdineID);
 
             modelBuilder.Entity<Products>()
                 .Property(e => e.Nome)
@@ -97,6 +106,7 @@ namespace CapstoneSkinMarket.Models
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.Users)
                 .WillCascadeOnDelete(false);
+
         }
     }
 }

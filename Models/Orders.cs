@@ -11,7 +11,7 @@ namespace CapstoneSkinMarket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orders()
         {
-            Products = new HashSet<Products>();
+            OrdersProducts = new HashSet<OrdersProducts>();
         }
 
         [Key]
@@ -29,6 +29,6 @@ namespace CapstoneSkinMarket.Models
         public virtual Users Users { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<OrdersProducts> OrdersProducts { get; set; }
     }
 }

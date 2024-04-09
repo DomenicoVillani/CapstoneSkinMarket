@@ -539,11 +539,15 @@
     <Content Include="Views\Footer\Contattaci.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Stile\Img\buyNow.webp" />
+    <Content Include="Views\OrdersProducts\Create.cshtml" />
+    <Content Include="Views\OrdersProducts\Delete.cshtml" />
+    <Content Include="Views\OrdersProducts\Details.cshtml" />
+    <Content Include="Views\OrdersProducts\Edit.cshtml" />
+    <Content Include="Views\OrdersProducts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Stile\Css\" />
-    <Folder Include="Views\OrdersProducts\" />
     <Folder Include="Views\RoleManager\" />
   </ItemGroup>
   <ItemGroup>

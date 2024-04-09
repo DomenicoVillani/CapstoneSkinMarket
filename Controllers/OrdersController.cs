@@ -15,6 +15,7 @@ namespace CapstoneSkinMarket.Controllers
         private DBContext db = new DBContext();
 
         // GET: Orders
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Users);
