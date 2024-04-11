@@ -64,7 +64,12 @@ else if (User.IsInRole("User"))
                             <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             <p class="card-text">@item.Rarita</p>
                             <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                            <p>AGGIUNGI AL CARRELLO DA FARE</p>
+                            <div>
+                                @using (Html.BeginForm("AddToCart", "OrdersProducts", new { id = item.ArticoloID }, FormMethod.Post))
+                                {
+                                    <input class="btn btn-success rounded-pill" type="submit" value="Aggiungi all'ordine" />
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -26,6 +26,7 @@
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Carrello", "Cart", "OrdersProducts", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (User.IsInRole("Admin"))
                     {

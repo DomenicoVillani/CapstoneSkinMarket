@@ -1,34 +1,49 @@
-﻿@model CapstoneSkinMarket.Models.OrdersProducts
+﻿@model List<CapstoneSkinMarket.Models.OrdersProducts>
 
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
-
 <div>
-    <h4>OrdersProducts</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Orders.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Orders.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Products.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Products.Nome)
-        </dd>
-
-    </dl>
+    <p>Nome @Model[0].Orders.Users.Nome</p>
+    <p>Cognome @Model[0].Orders.Users.Cognome</p>
+    <p>Email @Model[0].Orders.Users.Email</p>
+    <p>Costo @Model[0].Orders.TotalePrezzo</p>
+    <p>Note @Model[0].Orders.Note</p>
 </div>
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Articolo</th>
+                <th>Quantità</th>
+                <th>Prezzo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Products.Nome</td>
+                    <td>@item.Quantita</td>
+                    <td>@item.Products.Prezzo</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2">Prezzo totale: </td>
+                <td>
+                    @Model.Sum(item => (item.Products.Prezzo * item.Quantita))
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nessun articolo trovato per questo ordine.</p>
+}
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

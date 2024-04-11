@@ -189,7 +189,6 @@ namespace CapstoneSkinMarket.Controllers
                 }
                 ordini.TotalePrezzo = tot;
                 ordini.DataOrdine = DateTime.Today;
-
                 db.Orders.Add(ordini);
                 db.SaveChanges();
 

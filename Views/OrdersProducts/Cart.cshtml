@@ -1,0 +1,88 @@
+﻿@model CapstoneSkinMarket.Models.Orders
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Carrello</h2>
+@if (ViewBag.UserCart != null && ViewBag.UserCart.Count > 0)
+{
+    <div class="d-flex justify-content-between">
+        <div>
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Prezzo</th>
+                    <th>Immagine</th>
+                    <th>Rarita'</th>
+                    <th>Quantita'</th>
+                    <th>Rimuovi</th>
+                </tr>
+                @foreach (var item in ViewBag.UserCart)
+                {
+                    <tr>
+                        <td>@item.Products.Nome</td>
+                        <td>@item.Products.Prezzo €</td>
+                        <td><img src=@item.Products.Immagine alt="Immagine skin" height="200" width="100" /></td>
+                        <td>@item.Products.Rarita</td>
+                        <td>
+                            @using (Html.BeginForm("AggiornaQuantita", "OrdersProducts", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@item.Products.ArticoloID" />
+                                <button type="submit" name="operazione" value="decrementa" class="btn btn-outline-primary">-</button>
+                                <span>@item.Quantita</span>
+                                <button type="submit" name="operazione" value="incrementa" class="btn btn-outline-primary">+</button>
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("RimuoviDallCarrello", "OrdersProducts", FormMethod.Post))
+                            {
+                                <input type="hidden" name="articoloId" value="@item.Products.ArticoloID" />
+                                <input type="submit" value="Elimina" class="btn btn-outline-danger" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div>
+                @using (Html.BeginForm("SvuotaCarrello", "OrdersProducts", FormMethod.Post))
+                {
+                    <input type="submit" value="Svuota carrello" class="btn btn-outline-danger" />
+                }
+            </div>
+        </div>
+        <div>
+            @using (Html.BeginForm("CreateOrderFromCart", "OrdersProducts", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <h4 class="my-4">Ordina</h4>
+                    @Html.HiddenFor(model => model.OrdineID, new { Value = 0 })
+                    @Html.HiddenFor(model => model.TotalePrezzo, new { Value = 0 })
+                    @Html.HiddenFor(model => model.DataOrdine, new { Value = DateTime.Today.ToShortDateString() })
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control", name = "Note" } })
+                            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Conferma Ordine" class="btn btn-outline-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+}
+else
+{
+    <p>Il carrello è vuoto</p>
+}
+
