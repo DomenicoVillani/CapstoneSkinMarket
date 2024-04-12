@@ -1,5 +1,4 @@
 ﻿@model CapstoneSkinMarket.Models.Orders
-
 @{
     ViewBag.Title = "Carrello";
 }
@@ -48,7 +47,6 @@
         </div>
         <div class="col-3">
             <div class="cart-sticky-custom">
-                <!-- Inizio del form con l'azione corretta per creare un ordine dal carrello -->
                 <form method="post" action="@Url.Action("CreateOrderFromCart", "OrdersProducts")">
                     @Html.AntiForgeryToken()
                     <div class="form-group">
@@ -74,10 +72,25 @@
                     @if (ViewBag.PagamentoID != null)
                     {
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Pagamento.PagamentoID, "PagamentoID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Pagamento.PagamentoID, "Metodo di Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("PagamentoID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("PagamentoID", null, htmlAttributes: new { @class = "form-control", id = "metodoPagamento" })
                                 @Html.ValidationMessageFor(model => model.Pagamento.PagamentoID, "", new { @class = "text-danger" })
+                            </div>
+                            <!-- Form Dati Carta di Credito -->
+                            <div id="datiCarta">
+                                <div class="form-group">
+                                    <label for="numeroCarta">Numero Carta:</label>
+                                    <input type="text" class="form-control" id="numeroCarta" name="NumeroCarta">
+                                </div>
+                                <div class="form-group">
+                                    <label for="scadenzaCarta">Data di Scadenza:</label>
+                                    <input type="text" class="form-control" id="scadenzaCarta" name="DataScadenza" placeholder="MM/YY">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvvCarta">CVV:</label>
+                                    <input type="text" class="form-control" id="cvvCarta" name="CVV" maxlength="3">
+                                </div>
                             </div>
                         </div>
                     }
@@ -92,13 +105,11 @@
                         <button type="submit" class="btn btn-success">Conferma Ordine</button>
                     </div>
                 </form>
-                <!-- Form separato per svuotare il carrello -->
                 <form method="post" action="@Url.Action("SvuotaCarrello", "OrdersProducts")">
                     <input type="submit" value="Svuota carrello" class="btn btn-danger mb-4" />
                 </form>
             </div>
         </div>
-
     }
     else
     {
@@ -107,3 +118,66 @@
         </div>
     }
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#metodoPagamento').change(function () {
+            var selectedMethod = $(this).val();
+            if (selectedMethod == "1") { // Assumendo che "1" sia l'ID per "Carta di Credito"
+                $('#datiCarta').show();
+            } else {
+                $('#datiCarta').hide();
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var input = document.getElementById('scadenzaCarta');
+
+        input.addEventListener('input', function () {
+            // Rimuove i caratteri non numerici e non slash
+            var value = this.value.replace(/[^0-9\/]/g, '');
+            // Blocca l'inserimento di più di un slash
+            if ((value.match(/\//g) || []).length > 1) {
+                value = value.substring(0, value.length - 1);
+            }
+            // Assicura che dopo lo slash ci siano solo due cifre
+            if (value.indexOf('/') > 0) {
+                var parts = value.split('/');
+                if (parts[1].length > 2) {
+                    parts[1] = parts[1].substring(0, 2);
+                }
+                value = parts.join('/');
+            }
+            // Limita la lunghezza dell'input a 5 caratteri (MM/YY)
+            if (value.length > 5) {
+                value = value.substring(0, 5);
+            }
+            this.value = value;
+
+            // Verifica la validità del formato finale
+            if (!/^(\d{2}\/\d{2})$/.test(value) && value.length === 5) {
+                alert("Formato data non valido. Inserire nel formato MM/YY.");
+                this.value = ''; // Opzionale: rimuove il valore se non è valido
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var cvvInput = document.getElementById('cvvCarta');
+        var cardNumberInput = document.getElementById('numeroCarta');
+
+        cvvInput.addEventListener('input', function () {
+            // Permette solo numeri e limita a 3 cifre
+            this.value = this.value.replace(/\D/g, '').slice(0, 3);
+        });
+
+        cardNumberInput.addEventListener('input', function () {
+            // Permette solo numeri e limita a 16 cifre
+            this.value = this.value.replace(/\D/g, '').slice(0, 16);
+        });
+    });
+</script>
+
