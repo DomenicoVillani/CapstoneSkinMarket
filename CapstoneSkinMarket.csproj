@@ -397,6 +397,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\FiltriController.cs" />
     <Compile Include="Controllers\FooterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -547,6 +548,11 @@
     <Content Include="Views\OrdersProducts\Edit.cshtml" />
     <Content Include="Views\OrdersProducts\Index.cshtml" />
     <Content Include="Views\OrdersProducts\Cart.cshtml" />
+    <Content Include="Views\Filtri\MenoDieci.cshtml" />
+    <Content Include="Views\Filtri\DieciVenticinque.cshtml" />
+    <Content Include="Views\Filtri\DefaultRare.cshtml" />
+    <Content Include="Views\Filtri\UltraRara.cshtml" />
+    <Content Include="Views\Filtri\Cs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
