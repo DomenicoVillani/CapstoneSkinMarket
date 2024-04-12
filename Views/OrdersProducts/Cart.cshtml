@@ -48,8 +48,8 @@
         </div>
         <div class="col-3">
             <div class="cart-sticky-custom">
-                @using (Html.BeginForm("CreateOrderFromCart", "OrdersProducts", FormMethod.Post))
-                {
+                <!-- Inizio del form con l'azione corretta per creare un ordine dal carrello -->
+                <form method="post" action="@Url.Action("CreateOrderFromCart", "OrdersProducts")">
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label for="note">Note:</label>
@@ -71,7 +71,7 @@
                         @Html.LabelFor(model => model.IndirizzoFatturazione)
                         @Html.EditorFor(model => model.IndirizzoFatturazione, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                    if (ViewBag.PagamentoID != null)
+                    @if (ViewBag.PagamentoID != null)
                     {
                         <div class="form-group">
                             @Html.LabelFor(model => model.Pagamento.PagamentoID, "PagamentoID", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -80,7 +80,6 @@
                                 @Html.ValidationMessageFor(model => model.Pagamento.PagamentoID, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
                     }
                     else
                     {
@@ -91,14 +90,15 @@
                     <input type="hidden" name="DataOrdine" value="@DateTime.Today.ToShortDateString()" />
                     <div class="d-flex mt-3">
                         <button type="submit" class="btn btn-success">Conferma Ordine</button>
-                        @using (Html.BeginForm("SvuotaCarrello", "OrdersProducts", FormMethod.Post))
-                        {
-                            <button type="submit" class="btn btn-danger mb-4">Svuota carrello</button>
-                        }
                     </div>
-                }
+                </form>
+                <!-- Form separato per svuotare il carrello -->
+                <form method="post" action="@Url.Action("SvuotaCarrello", "OrdersProducts")">
+                    <input type="submit" value="Svuota carrello" class="btn btn-danger mb-4" />
+                </form>
             </div>
         </div>
+
     }
     else
     {
