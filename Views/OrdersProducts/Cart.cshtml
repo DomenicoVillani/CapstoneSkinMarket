@@ -1,15 +1,19 @@
 ﻿@model CapstoneSkinMarket.Models.Orders
+
 @{
-    ViewBag.Title = "Cart";
+    ViewBag.Title = "Carrello";
 }
+
 <style>
     .cart-sticky-custom {
         position: sticky;
-        top: 6rem; /* Ad esempio, se la tua navbar è circa 48px e il font-size di base è 16px */
+        top: 6rem; /* Se la tua navbar è circa 48px e il font-size di base è 16px */
         z-index: 1010;
     }
 </style>
+
 <h2>Carrello</h2>
+
 <div class="row">
     @if (ViewBag.UserCart != null && ViewBag.UserCart.Count > 0)
     {
@@ -44,22 +48,55 @@
         </div>
         <div class="col-3">
             <div class="cart-sticky-custom">
-                <form method="post" action="@Url.Action("CreateOrderFromCart", "OrdersProducts")">
+                @using (Html.BeginForm("CreateOrderFromCart", "OrdersProducts", FormMethod.Post))
+                {
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label for="note">Note:</label>
                         <textarea class="form-control" id="note" name="Note" rows="3"></textarea>
                     </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome)
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cognome)
+                        @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IndirizzoCasa)
+                        @Html.EditorFor(model => model.IndirizzoCasa, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IndirizzoFatturazione)
+                        @Html.EditorFor(model => model.IndirizzoFatturazione, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    if (ViewBag.PagamentoID != null)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Pagamento.PagamentoID, "PagamentoID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("PagamentoID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Pagamento.PagamentoID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        
+                    }
+                    else
+                    {
+                        <p>Nessun metodo di pagamento disponibile. Si prega di contattare l'amministrazione.</p>
+                    }
                     <input type="hidden" name="OrdineID" value="0" />
                     <input type="hidden" name="TotalePrezzo" value="0" />
                     <input type="hidden" name="DataOrdine" value="@DateTime.Today.ToShortDateString()" />
                     <div class="d-flex mt-3">
                         <button type="submit" class="btn btn-success">Conferma Ordine</button>
-                        <form method="post" action="@Url.Action("SvuotaCarrello", "OrdersProducts")">
-                            <input type="submit" value="Svuota carrello" class="btn btn-danger mb-4" />
-                        </form>
+                        @using (Html.BeginForm("SvuotaCarrello", "OrdersProducts", FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-danger mb-4">Svuota carrello</button>
+                        }
                     </div>
-                </form>
+                }
             </div>
         </div>
     }

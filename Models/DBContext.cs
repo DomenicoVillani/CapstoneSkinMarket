@@ -17,6 +17,7 @@ namespace CapstoneSkinMarket.Models
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<OrdersProducts> OrdersProducts { get; set; }
+        public virtual DbSet<Pagamento> Pagamento {  get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -412,6 +412,7 @@
     <Compile Include="Models\Games.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\OrdersProducts.cs" />
+    <Compile Include="Models\Pagamento.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\RoleManager.cs" />
     <Compile Include="Models\Users.cs" />

@@ -165,6 +165,7 @@ namespace CapstoneSkinMarket.Controllers
                 // Filtra solo gli articoli relativi all'utente attuale
                 cart = carts.Where(a => a.UserID == userId).ToList();
                 ViewBag.UserCart = cart;
+                ViewBag.PagamentoID = new SelectList(db.Pagamento, "PagamentoID", "TipoPagamento");
             }
             return View();
         }
@@ -210,6 +211,7 @@ namespace CapstoneSkinMarket.Controllers
                     userCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(userCookie);
                 }
+
                 return RedirectToAction("Details", "OrdersProducts", new { id = newOrdineId });
             }
             else
@@ -219,7 +221,7 @@ namespace CapstoneSkinMarket.Controllers
                 {
                     System.Diagnostics.Debug.WriteLine(modelError.ErrorMessage);
                 }
-                return RedirectToAction("Cart");
+                return View(ordini);
             }
         }
 
@@ -289,7 +291,7 @@ namespace CapstoneSkinMarket.Controllers
                 {
                     art.Quantita++;
                 }
-                else if(operazione == "decrementa" && art.Quantita > 1)
+                else if (operazione == "decrementa" && art.Quantita > 1)
                 {
                     art.Quantita--;
                 }
