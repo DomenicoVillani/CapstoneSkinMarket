@@ -213,6 +213,7 @@ namespace CapstoneSkinMarket.Controllers
                 {
                     userCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(userCookie);
+                    await SendConfirmEmail();
                     await SendEmail(userCart);
                 }
 
@@ -269,7 +270,7 @@ namespace CapstoneSkinMarket.Controllers
                     {
                         From = new MailAddress(smtpUser),
                         Subject = "Conferma del tuo ordine",
-                        Body = $"Grazie per il tuo ordine! Il tuo ordine è stato ricevuto e sarà processato a breve. Qui ci sono i codici dei prodotti nel tuo carrello:<br>{productCodes}",
+                        Body = $"Grazie ancora per il tuo ordine! Qui ci sono i codici dei prodotti nel tuo carrello:<br>{productCodes}",
                         IsBodyHtml = true,
                     };
 
@@ -284,7 +285,42 @@ namespace CapstoneSkinMarket.Controllers
             }
         }
 
+        public async Task SendConfirmEmail()
+        {
+            try
+            {
+                var userId = Convert.ToInt32(User.Identity.Name);
+                string smtpServer = "smtp.elasticemail.com";
+                int smtpPort = 2525;
+                string smtpUser = "skinbazaarclient@gmail.com";
+                string smtpPassword = "5F412D24268B10746B6918CC1CCEAB5BDF58";
+                var user = db.Users.FirstOrDefault(u => u.UserID == userId);
+                var userEmail = user.Email;
 
+                using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
+                {
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential(smtpUser, smtpPassword);
+                    smtpClient.EnableSsl = true;
+
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(smtpUser),
+                        Subject = "Conferma del tuo ordine",
+                        Body = "Grazie per il tuo ordine! Il tuo ordine è stato ricevuto e sarà processato a breve.",
+                        IsBodyHtml = true,
+                    };
+
+                    mailMessage.To.Add(userEmail);
+
+                    await smtpClient.SendMailAsync(mailMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Errore: " + ex.Message;
+            }
+        }
 
         [HttpPost]
         public ActionResult SvuotaCarrello()
