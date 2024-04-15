@@ -410,6 +410,7 @@
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\DBContext.cs" />
+    <Compile Include="Models\EmailElastic.cs" />
     <Compile Include="Models\Games.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\OrdersProducts.cs" />
@@ -553,6 +554,7 @@
     <Content Include="Views\Filtri\DefaultRare.cshtml" />
     <Content Include="Views\Filtri\UltraRara.cshtml" />
     <Content Include="Views\Filtri\Cs.cshtml" />
+    <Content Include="Views\Footer\EmailMandata.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

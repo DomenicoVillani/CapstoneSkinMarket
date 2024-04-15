@@ -1,4 +1,4 @@
-﻿
+﻿@model CapstoneSkinMarket.Models.EmailElastic
 @{
     ViewBag.Title = "Contattaci";
 }
@@ -10,3 +10,20 @@
 <p>Telefona a <a>443434</a>durante gli orari di ufficio per assistenza immediata.</p>
 <p>Orari di Ufficio</p>
 <p>Il nostro team è disponibile per assisterti dal lunedì al venerdì, dalle 9:00 alle 18:00, orario del Mondo Virtuale (MV). Ti preghiamo di tenere presente che le richieste inviate al di fuori degli orari di ufficio potrebbero richiedere un po' più di tempo per ricevere una risposta.</p>
+
+@using (Html.BeginForm("SendEmail", "Footer", FormMethod.Post))
+{
+    <label for="EmailMittente">EmailMittente:</label>
+    <input type="text" id="EmailMittente" name="EmailMittente" required />
+
+    <label for="NomeCognome">Nome e Cognome:</label>
+    <input type="text" id="NomeCognome" name="NomeCognome" required />
+
+    <label for="Oggetto">Oggetto:</label>
+    <input type="text" id="Oggetto" name="Oggetto" required />
+
+    <label for="ContenutoEmail">Body:</label>
+    <textarea id="ContenutoEmail" name="ContenutoEmail" required></textarea>
+
+    <button type="submit">Send Email</button>
+}
