@@ -4,6 +4,9 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CapstoneSkinMarket.Models;
@@ -173,7 +176,7 @@ namespace CapstoneSkinMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrderFromCart(Orders ordini)
+        public async Task<ActionResult> CreateOrderFromCart(Orders ordini)
         {
             if (ModelState.IsValid)
             {
@@ -210,13 +213,14 @@ namespace CapstoneSkinMarket.Controllers
                 {
                     userCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(userCookie);
+                    await SendEmail(userCart);
                 }
 
                 return RedirectToAction("Details", "OrdersProducts", new { id = newOrdineId });
             }
             else
             {
-                //se il modello non e' valido visualizza gli errori di validazione
+                // se il modello non e' valido visualizza gli errori di validazione
                 foreach (var modelError in ModelState.Values.SelectMany(v => v.Errors))
                 {
                     System.Diagnostics.Debug.WriteLine(modelError.ErrorMessage);
@@ -224,6 +228,63 @@ namespace CapstoneSkinMarket.Controllers
                 return View(ordini);
             }
         }
+
+        private static Random random = new Random(); // Istanza statica
+        private string GenerateRandomCode(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public async Task SendEmail(List<Cart> userCart)
+        {
+            try
+            {
+                var userId = Convert.ToInt32(User.Identity.Name);
+                string smtpServer = "smtp.elasticemail.com";
+                int smtpPort = 2525;
+                string smtpUser = "skinbazaarclient@gmail.com";
+                string smtpPassword = "5F412D24268B10746B6918CC1CCEAB5BDF58";
+                var user = db.Users.FirstOrDefault(u => u.UserID == userId);
+                var userEmail = user.Email;
+
+                using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
+                {
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential(smtpUser, smtpPassword);
+                    smtpClient.EnableSsl = true;
+
+                    var productCodes = new StringBuilder();
+                    foreach (var item in userCart)
+                    {
+                        for (int i = 0; i < item.Quantita; i++)
+                        {
+                            string code = GenerateRandomCode(10);
+                            productCodes.AppendLine($"Prodotto: {item.Products.Nome}, Codice: {code}<br>");
+                        }
+                    }
+
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(smtpUser),
+                        Subject = "Conferma del tuo ordine",
+                        Body = $"Grazie per il tuo ordine! Il tuo ordine è stato ricevuto e sarà processato a breve. Qui ci sono i codici dei prodotti nel tuo carrello:<br>{productCodes}",
+                        IsBodyHtml = true,
+                    };
+
+                    mailMessage.To.Add(userEmail);
+
+                    await smtpClient.SendMailAsync(mailMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Errore: " + ex.Message;
+            }
+        }
+
+
 
         [HttpPost]
         public ActionResult SvuotaCarrello()
