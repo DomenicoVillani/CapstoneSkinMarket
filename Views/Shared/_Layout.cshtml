@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
     @Styles.Render("~/Content/css")
+    <!-- Aggiornamento: Includi jQuery prima di Bootstrap -->
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
 
@@ -29,7 +32,12 @@
                         <li>@Html.ActionLink("Carrello", "Cart", "OrdersProducts", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Il tuo profilo!", "Details", "Users", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
-
+                        <li>
+                            <form class="form-inline my-2 my-lg-0" action="@Url.Action("Search", "Products")" method="get">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Cerca prodotti" aria-label="Search" name="searchTerm">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+                            </form>
+                        </li>
                     }
                     @if (User.IsInRole("Admin"))
                     {
@@ -38,7 +46,12 @@
                         <li>@Html.ActionLink("Aggiungi prodotto!", "Create", "Products", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Ordini Generali!", "Index", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Tutti i clienti!", "Index", "Users", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
-
+                        <li>
+                            <form class="form-inline my-2 my-lg-0" action="@Url.Action("Search", "Users")" method="get">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Cerca user con il nick" aria-label="Search" name="searchTerm">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+                            </form>
+                        </li>
                     }
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -73,8 +86,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

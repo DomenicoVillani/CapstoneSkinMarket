@@ -51,8 +51,8 @@ namespace CapstoneSkinMarket.Models
         [StringLength(10)]
         public string Ruolo { get; set; } = "User";
 
-        [Column(TypeName = "image")]
-        public byte[] ImmagineProfilo { get; set; } = null;
+        [Required]
+        public string ProPic { get; set; } = "PicDefault.png";
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

@@ -4,95 +4,72 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>Details - @Html.DisplayFor(model => model.Username)</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Url.Content("~/Stile/Img/Propic/" + Model.ProPic)" class="img-thumbnail" alt="Profile Picture" />
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-3">
+                            Nome:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
 
-<div>
-    <h4>Users</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
+                        <dt class="col-sm-3">
+                            Cognome:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Cognome)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
+                        <dt class="col-sm-3">
+                            Email:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+                        <dt class="col-sm-3">
+                            Data Nascita:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.DataNascita)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+                        <dt class="col-sm-3">
+                            Codice Fiscale:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.CodFiscale)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cognome)
-        </dt>
+                        <dt class="col-sm-3">
+                            Telefono:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Telefono)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cognome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNascita)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataNascita)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CodFiscale)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CodFiscale)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ruolo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ruolo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImmagineProfilo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImmagineProfilo)
-        </dd>
-
-    </dl>
+                        <dt class="col-sm-3">
+                            Ruolo:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Ruolo)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="@Url.Action("Edit", "Users", new { id = Model.UserID })" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

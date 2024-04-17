@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,6 +21,13 @@ namespace CapstoneSkinMarket.Controllers
             var products = db.Products.Include(p => p.Games);
             return View(products.ToList());
         }
+
+        public ActionResult Search(string searchTerm)
+        {
+            var products = db.Products.Where(p => p.Nome.Contains(searchTerm)).ToList();
+            return View("Index", products);
+        }
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -48,18 +56,37 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArticoloID,Nome,Immagine,Descrizione,Prezzo,Rarita,GiocoID")] Products products)
+        public ActionResult Create([Bind(Include = "ArticoloID,Nome,Immagine,Descrizione,Prezzo,Rarita,GiocoID")] Products products, HttpPostedFileBase Immagine)
         {
             if (ModelState.IsValid)
             {
+                if (Immagine != null && Immagine.ContentLength > 0)
+                {
+                    // Definisce il nuovo percorso per salvare il file
+                    var fileName = Path.GetFileName(Immagine.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Stile/Img"), fileName);  // Modifica qui il percorso di salvataggio
+
+                    // Crea la directory se non esiste
+                    var directory = Path.GetDirectoryName(path);
+                    if (!Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
+
+                    Immagine.SaveAs(path);
+                    products.Immagine = fileName; // Salva solo il nome del file nel database
+                }
+
                 db.Products.Add(products);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            // Se il ModelState non è valido, ricarica la vista con le informazioni correnti
             ViewBag.GiocoID = new SelectList(db.Games, "GiocoID", "NomeGioco", products.GiocoID);
             return View(products);
         }
+
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)

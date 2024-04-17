@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,6 +21,12 @@ namespace CapstoneSkinMarket.Controllers
             return View(db.Users.ToList());
         }
 
+
+        public ActionResult Search(string searchTerm)
+        {
+            var userSearch = db.Users.Where(p => p.Username.Contains(searchTerm)).ToList();
+            return View("Index", userSearch);
+        }
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
@@ -93,16 +100,25 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono,Ruolo,ImmagineProfilo")] Users users)
+        public ActionResult Edit([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono")] Users user, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(users).State = EntityState.Modified;
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(upload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Stile/Img/Propic"), fileName);
+                    upload.SaveAs(path);
+                    user.ProPic = fileName; // Aggiorna il percorso dell'immagine del profilo
+                }
+
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = user.UserID });
             }
-            return View(users);
+            return View(user);
         }
+
 
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)

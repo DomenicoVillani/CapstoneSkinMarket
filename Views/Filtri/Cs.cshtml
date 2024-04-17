@@ -16,7 +16,14 @@
             {
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                        @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <img class="card-img-top" src="@item.Immagine" alt="Product Image">
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
+                        }
                         <div class="card-body">
                             <p class="card-title">@item.Nome</p>
                             <p class="card-text">@item.Games.NomeGioco</p>

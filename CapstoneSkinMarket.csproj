@@ -505,6 +505,7 @@
     <Content Include="Stile\Img\joinus.png" />
     <Content Include="Stile\Img\knifeCS2.png" />
     <Content Include="Stile\Img\m4cs2.png" />
+    <Content Include="Stile\Img\Propic\PicDefault.png" />
     <Content Include="Stile\Img\skinDesertcs2.png" />
     <Content Include="Stile\Img\usp2cs2.png" />
     <Content Include="Stile\Img\Uspcs2.png" />
