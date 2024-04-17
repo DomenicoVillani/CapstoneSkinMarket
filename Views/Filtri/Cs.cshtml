@@ -30,9 +30,9 @@
                             <p class="card-text">@item.Descrizione</p>
                             <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                            <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                            <a href="@Url.Action("Edit","Products", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
+                            <a href="@Url.Action("Details","Products", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            <a href="@Url.Action("Delete","Products", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ else if (User.IsInRole("User"))
                             <p class="card-text">@item.Descrizione</p>
                             <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            <a href="@Url.Action("Details","Products", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
                             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
                             {
                                 <input type="hidden" name="id" value="@item.ArticoloID" />
@@ -89,7 +89,7 @@ else
                             <p class="card-text">@item.Descrizione</p>
                             <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            <a href="@Url.Action("Details","Products", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
                         </div>
                     </div>
                 </div>
