@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Products</h4>
         <hr />
@@ -52,7 +52,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Rarita, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Rarita, new { htmlAttributes = new { @class = "form-control" } })
+                @{
+                    var raritaOptions = new List<string>
+                    {
+                        "Default",
+                        "Rara",
+                        "Ultra",
+                        "Ultra Rara",
+                        "Rara Segreta",
+                        "Leggendaria"
+                    };
+                }
+                @Html.DropDownListFor(model => model.Rarita, new SelectList(raritaOptions), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Rarita, "", new { @class = "text-danger" })
             </div>
         </div>
