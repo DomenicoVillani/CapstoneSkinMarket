@@ -61,7 +61,7 @@ namespace CapstoneSkinMarket.Controllers
                 {
                     db.Users.Add(users);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login", "Auth");
                 }
                 else
                 {

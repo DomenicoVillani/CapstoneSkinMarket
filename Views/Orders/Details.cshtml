@@ -1,4 +1,4 @@
-﻿@model CapstoneSkinMarket.Models.Orders
+﻿@model List<CapstoneSkinMarket.Models.Orders>
 
 @{
     ViewBag.Title = "Details";
@@ -9,42 +9,29 @@
 <div>
     <h4>Orders</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Users.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Users.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalePrezzo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalePrezzo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataOrdine)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataOrdine)
-        </dd>
-
-    </dl>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-4">
+        @foreach (var order in Model)
+        {
+            <div class="col mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ordine: @order.OrdineID</h5>
+                        <dl class="dl-horizontal">
+                            <dt>@Html.DisplayNameFor(model => order.Users.Nome)</dt>
+                            <dd>@Html.DisplayFor(model => order.Users.Nome)</dd>
+                            <dt>@Html.DisplayNameFor(model => order.IndirizzoCasa)</dt>
+                            <dd>@Html.DisplayFor(model => order.IndirizzoCasa)</dd>
+                            <dt>@Html.DisplayNameFor(model => order.IndirizzoFatturazione)</dt>
+                            <dd>@Html.DisplayFor(model => order.IndirizzoFatturazione)</dd>
+                            <dt>@Html.DisplayNameFor(model => order.Note)</dt>
+                            <dd>@Html.DisplayFor(model => order.Note)</dd>
+                            <dt>@Html.DisplayNameFor(model => order.TotalePrezzo)</dt>
+                            <dd>@Html.DisplayFor(model => order.TotalePrezzo)</dd>
+                        </dl>
+                        <a href="/OrdersProducts/Details/@order.OrdineID" class="btn btn-primary">Dettagli</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrdineID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -555,6 +555,16 @@
     <Content Include="Views\Filtri\UltraRara.cshtml" />
     <Content Include="Views\Filtri\Cs.cshtml" />
     <Content Include="Views\Footer\EmailMandata.cshtml" />
+    <Content Include="Views\Filtri\Fortnite.cshtml" />
+    <Content Include="Views\Filtri\Tf.cshtml" />
+    <Content Include="Views\Filtri\VenticinqueSettantacinque.cshtml" />
+    <Content Include="Views\Filtri\SettantacinqueCentocinquanta.cshtml" />
+    <Content Include="Views\Filtri\CentocinquantaCinquecento.cshtml" />
+    <Content Include="Views\Filtri\CinquecentoPiu.cshtml" />
+    <Content Include="Views\Filtri\Rara.cshtml" />
+    <Content Include="Views\Filtri\Ultra.cshtml" />
+    <Content Include="Views\Filtri\RaraSegreta.cshtml" />
+    <Content Include="Views\Filtri\Leggendaria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

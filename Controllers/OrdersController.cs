@@ -18,7 +18,8 @@ namespace CapstoneSkinMarket.Controllers
         [Authorize(Roles = "Admin, User")]
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Users);
+            var orders = db.Orders.Include(o => o.Users)
+                                    .OrderByDescending(o=> o.DataOrdine);
             return View(orders.ToList());
         }
 
@@ -29,12 +30,14 @@ namespace CapstoneSkinMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders.Find(id);
-            if (orders == null)
+            var idInt = Convert.ToInt32(id);
+            var order = db.Orders
+                        .Where(o => o.UserID == idInt).ToList();
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(orders);
+            return View(order);
         }
 
         // GET: Orders/Create

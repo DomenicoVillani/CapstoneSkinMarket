@@ -8,27 +8,51 @@
 @if (User.IsInRole("Admin"))
 {
     <h2>Index</h2>
-    <p>@Html.ActionLink("Create New", "Create")</p>
     foreach (var gameGroup in groupedByGameName)
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
+            @{
+                int productCount = 0;
+            }
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
-                        <div class="card-body">
-                            <p class="card-title">@item.Nome</p>
-                            <p class="card-text">@item.Games.NomeGioco</p>
-                            <p class="card-text">@item.Descrizione</p>
-                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                            <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                            <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                if (productCount < 10) // Limita a 10 prodotti
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <p class="card-title">@item.Nome</p>
+                                <p class="card-text">@item.Games.NomeGioco</p>
+                                <p class="card-text">@item.Descrizione</p>
+                                <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                                <p class="card-text">@item.Rarita</p>
+                                <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
+                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                                <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
+                    productCount++; // Incrementa il contatore
+                }
+            }
+            @if (gameGroup.Count() > 10) // Se ci sono più di 10 prodotti, mostra il link
+            {
+                <div class="col-12 mt-4">
+                    @if (gameGroup.Key == "Counter-Strike 2")
+                    {
+                        <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+                    else if (gameGroup.Key == "Team Fortress 2")
+                    {
+                        <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+                    else if (gameGroup.Key == "Fortnite")
+                    {
+                        <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+
                 </div>
             }
         </div>
@@ -41,30 +65,56 @@ else if (User.IsInRole("User"))
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
+            @{
+                int productCount = 0;
+            }
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
-                        <div class="card-body">
-                            <p class="card-title">@item.Nome</p>
-                            <p class="card-text">@item.Games.NomeGioco</p>
-                            <p class="card-text">@item.Descrizione</p>
-                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                            <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
-                            {
-                                <input type="hidden" name="id" value="@item.ArticoloID" />
-                                <input class="btn btn-success rounded-pill" type="submit" value="Aggiungi all'ordine" />
-                            }
+                if (productCount < 10) // Limita a 10 prodotti
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <p class="card-title">@item.Nome</p>
+                                <p class="card-text">@item.Games.NomeGioco</p>
+                                <p class="card-text">@item.Descrizione</p>
+                                <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                                <p class="card-text">@item.Rarita</p>
+                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
+                                {
+                                    <input type="hidden" name="id" value="@item.ArticoloID" />
+                                    <input class="btn btn-success rounded-pill" type="submit" value="Aggiungi all'ordine" />
+                                }
+                            </div>
                         </div>
                     </div>
+                    productCount++; // Incrementa il contatore
+                }
+            }
+            @if (gameGroup.Count() > 10) // Se ci sono più di 10 prodotti, mostra il link
+            {
+                <div class="col-12 mt-4">
+                    @if (gameGroup.Key == "Counter-Strike 2")
+                    {
+                        <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+                    else if (gameGroup.Key == "Team Fortress 2")
+                    {
+                        <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+                    else if (gameGroup.Key == "Fortnite")
+                    {
+                        <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+
                 </div>
             }
         </div>
     }
 }
+
 else
 {
     <h2>Loggati per poter inserire i prodotti nel carrello</h2>
@@ -72,20 +122,45 @@ else
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
+            @{
+                int productCount = 0;
+            }
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="@item.Immagine" class="card-img-top" alt="Product Image">
-                        <div class="card-body">
-                            <p class="card-title">@item.Nome</p>
-                            <p class="card-text">@item.Games.NomeGioco</p>
-                            <p class="card-text">@item.Descrizione</p>
-                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                            <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                if (productCount < 10) // Limita a 10 prodotti
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="@item.Immagine" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <p class="card-title">@item.Nome</p>
+                                <p class="card-text">@item.Games.NomeGioco</p>
+                                <p class="card-text">@item.Descrizione</p>
+                                <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                                <p class="card-text">@item.Rarita</p>
+                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            </div>
                         </div>
                     </div>
+                    productCount++; // Incrementa il contatore
+                }
+            }
+            @if (gameGroup.Count() > 10) // Se ci sono più di 10 prodotti, mostra il link
+            {
+                <div class="col-12 mt-4">
+                    @if (gameGroup.Key == "Counter-Strike 2")
+                    {
+                        <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+                    else if (gameGroup.Key == "Team Fortress 2")
+                    {
+                        <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+                    else if (gameGroup.Key == "Fortnite")
+                    {
+                        <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                    }
+
                 </div>
             }
         </div>
