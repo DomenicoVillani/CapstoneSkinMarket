@@ -51,6 +51,11 @@ body {
     padding:1%;
 }
 
+.div-hover-scale:hover {
+    cursor: pointer;
+    transform:scale(110%);
+    transition:0.5s;
+}
 /* Media queries per adattare la posizione e la dimensione del font su dispositivi mobili */
 @media (max-width: 600px) { /* Per dispositivi mobili */
     .overlay-title {

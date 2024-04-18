@@ -24,27 +24,29 @@
         </div>
     </div>
 
-    <div id="section-below" class="d-flex flex-column flex-lg-row justify-content-evenly mt-3">
-        <div class="div-bord mx-5 mt-3">
-            <div class="margin-div-bord">
+    <div id="section-below" class="row justify-content-evenly mt-3">
+        <div class="col-md-4 mt-3 d-flex align-items-center div-hover-scale">
+            <div class="div-bord margin-div-bord">
                 <h2>Esplora la Nostra Vasta Selezione di Skin</h2>
                 <p>Sfoglia la nostra vasta collezione di skin, abbiamo tutto ciò di cui hai bisogno per dare un tocco unico al tuo gameplay.</p>
             </div>
         </div>
-        <div class="div-bord mx-5 mt-3">
-            <div class="margin-div-bord">
+        <div class="col-md-4 mt-3 d-flex align-items-center div-hover-scale">
+            <div class="div-bord margin-div-bord">
                 <h2>Stile e Qualità Garantiti</h2>
                 <p>La qualità è la nostra priorità principale. Ogni skin nel nostro inventario è stata accuratamente selezionata per garantire stile e prestazioni impeccabili. Non accontentarti di meno con SkinBazaar, hai accesso solo alle migliori skin disponibili sul mercato.</p>
             </div>
         </div>
-        <div class="div-bord mx-5 mt-3">
-            <div class="margin-div-bord">
+        <div class="col-md-4 mt-3 d-flex align-items-center div-hover-scale">
+            <div class="div-bord margin-div-bord">
                 <h2>Assistenza Clienti Dedicata</h2>
-                <p>Il nostro team di assistenza clienti è qui per aiutarti in ogni fase del tuo viaggio con SkinBazaar. Dai consigli sulla scelta delle skin alla risoluzione dei problemi tecnici, siamo sempre pronti ad aiutarti.</p>
+                <p>Il nostro team di assistenza clienti è qui per offrirti supporto in ogni fase del tuo viaggio con SkinBazaar. Dai consigli personalizzati sulla scelta delle skin alla risoluzione di eventuali problemi tecnici, siamo sempre pronti e disponibili ad aiutarti con dedizione.</p>
             </div>
         </div>
     </div>
-    <div class="div-bord mt-5">
+
+
+    <div class="div-bord mt-5 div-hover-scale">
         <div class="margin-div-bord">
             <h2>Entra nel Mondo di SkinBazaar Oggi!</h2>
             <p>Non aspettare altro tempo per dare al tuo personaggio un tocco di stile unico. Unisciti alla nostra community di giocatori appassionati e inizia a esplorare le possibilità infinite di personalizzazione con SkinBazaar.</p>
@@ -55,20 +57,20 @@
             @if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 <a href="@Url.Action("Index", "Products")">
-                    <img src="~/Stile/Img/buyNow.png" />
+                    <img src="~/Stile/Img/buyNow.png" class="div-hover-scale"/>
                 </a>
             }
             else
             {
                 <a href="@Url.Action("Login", "Auth")">
-                    <img src="~/Stile/Img/joinus.png" alt="Unisciti a noi" />
+                    <img src="~/Stile/Img/joinus.png" alt="Unisciti a noi" class="div-hover-scale"/>
                 </a>
             }
         </div>
 
         <div>
             <a href="@Url.Action("Contattaci", "Footer")">
-                <img src="~/Stile/Img/contact.png" class="img-fluid" width="500" />
+                <img src="~/Stile/Img/contact.png" class="img-fluid div-hover-scale" width="500"/>
             </a>
 
         </div>
