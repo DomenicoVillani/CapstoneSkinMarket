@@ -494,6 +494,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Stile\Css\Home.css" />
+    <Content Include="Stile\Css\Layout.css" />
     <Content Include="Stile\Img\250px-Second_opinion.png" />
     <Content Include="Stile\Img\350px-Demoman_taunt_laugh.png" />
     <Content Include="Stile\Img\akcs2.png" />

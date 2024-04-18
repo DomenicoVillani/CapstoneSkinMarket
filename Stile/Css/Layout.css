@@ -1,0 +1,18 @@
+﻿.nav-color {
+    background-color: #252525;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(253,251,234);
+}
+
+.btn-custom {
+    color: #C34BDC; /* Colore del testo */
+    border-color: #C34BDC; /* Colore del bordo */
+}
+
+.btn-custom:hover {
+    color: #fff; /* Colore del testo al passaggio del mouse */
+    background-color: #C34BDC; /* Colore di sfondo al passaggio del mouse */
+}

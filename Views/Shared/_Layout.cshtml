@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
     @Styles.Render("~/Content/css")
-    <!-- Aggiornamento: Includi jQuery prima di Bootstrap -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/bootstrap")
+    <link href="~/Stile/Css/Layout.css" rel="stylesheet" />
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark nav-color sticky-top">
         <div class="container">
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                 <img src="~/Stile/Img/SkinBazaarLogo.png" alt="Logo" class="navbar-logo rounded-circle" width="75" height="75" />
@@ -27,27 +27,27 @@
                 <ul class="navbar-nav flex-grow-1">
                     @if (User.IsInRole("User"))
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>
-                            <form class="form-inline my-2 my-lg-0" action="@Url.Action("Search", "Products")" method="get">
+                            <form class="form-inline d-flex flex-row align-items-center my-2 my-lg-0" action="@Url.Action("Search", "Products")" method="get">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Cerca prodotti" aria-label="Search" name="searchTerm">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+                                <button class="btn btn-custom my-2 my-sm-0" type="submit">Cerca</button>
                             </form>
                         </li>
                     }
                     @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Aggiungi prodotto!", "Create", "Products", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Ordini Generali!", "Index", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Tutti i clienti!", "Index", "Users", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Aggiungi prodotto!", "Create", "Products", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Ordini Generali!", "Index", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
+                        <li class="nav-item d-flex align-items-center me-2">@Html.ActionLink("Tutti i clienti!", "Index", "Users", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>
-                            <form class="form-inline my-2 my-lg-0" action="@Url.Action("Search", "Users")" method="get">
+                            <form class="form-inline d-flex flex-row align-items-center my-2 my-lg-0" action="@Url.Action("Search", "Users")" method="get">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Cerca user con il nick" aria-label="Search" name="searchTerm">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+                                <button class="btn btn-custom my-2 my-sm-0" type="submit">Cerca</button>
                             </form>
                         </li>
                     }
@@ -57,19 +57,19 @@
                     {
                         if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item"><a href="@Url.Action("Details", "Users", new {id = User.Identity.Name})"><img src="~/Stile/Img/Propic/PicDefault.png" height="30" width="30" class="rounded-pill" /></a></li>
-                            <li class="nav-item"><a href="@Url.Action("Logout", "Auth")"><img src="~/Stile/Img/Propic/logout.png" height="30" width="30" /></a></li>
+                            <li class="nav-item d-flex align-items-center me-2"><a href="@Url.Action("Details", "Users", new {id = User.Identity.Name})"><img src="~/Stile/Img/Propic/PicDefault.png" height="30" width="30" class="rounded-pill" /></a></li>
+                            <li class="nav-item d-flex align-items-center me-2"><a href="@Url.Action("Logout", "Auth")"><img src="~/Stile/Img/Propic/logout.png" height="30" width="30" /></a></li>
                         }
                         else
                         {
-                            <li class="nav-item"><a href="@Url.Action("Cart", "OrdersProducts")"><img src="~/Stile/Img/Propic/shopping-cart.png" height="30" width="30" /></a></li>
-                            <li class="nav-item"><a href="@Url.Action("Details", "Users", new {id = User.Identity.Name})"><img src="~/Stile/Img/Propic/PicDefault.png" height="30" width="30" class="rounded-pill" /></a></li>
-                            <li class="nav-item"><a href="@Url.Action("Logout", "Auth")"><img src="~/Stile/Img/Propic/logout.png" height="30" width="30" /></a></li>
+                            <li class="nav-item d-flex align-items-center me-2"><a href="@Url.Action("Cart", "OrdersProducts")"><img src="~/Stile/Img/Propic/shopping-cart.png" height="30" width="30" /></a></li>
+                            <li class="nav-item d-flex align-items-center me-2"><a href="@Url.Action("Details", "Users", new {id = User.Identity.Name})"><img src="~/Stile/Img/Propic/PicDefault.png" height="30" width="30" class="rounded-pill" /></a></li>
+                            <li class="nav-item d-flex align-items-center me-2"><a href="@Url.Action("Logout", "Auth")"><img src="~/Stile/Img/Propic/logout.png" height="30" width="30" /></a></li>
                         }
                     }
                     else
                     {
-                        <li class="nav-item"><a href="@Url.Action("Login", "Auth")" class="btn btn-outline-light pacifico-regular">Login</a></li>
+                        <li class="nav-item d-flex align-items-center me-2"><a href="@Url.Action("Login", "Auth")" class="btn btn-outline-light pacifico-regular">Login</a></li>
                     }
                 </ul>
             </div>
@@ -78,16 +78,16 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - SkinBazaar</p>
-            <div class="row">
-                <div class="col-2">
+        <footer class="mb-4">
+            <p class="text-center fs-4 fw-bold">&copy; @DateTime.Now.Year - SkinBazaar</p>
+            <div class="d-flex justify-content-evenly">
+                <div>
                     <a href="@Url.Action("Chisiamo", "Footer")">Chi siamo</a>
                 </div>
-                <div class="col-2 offset-2">
+                <div>
                     <a href="@Url.Action("DoveTrovarci", "Footer")">Dove Trovarci</a>
                 </div>
-                <div class="col-2 offset-2">
+                <div>
                     <a href="@Url.Action("Contattaci", "Footer")">Contattaci</a>
                 </div>
             </div>
