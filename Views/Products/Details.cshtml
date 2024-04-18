@@ -6,61 +6,57 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Products</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Games.NomeGioco)
-        </dt>
+<div class="card">
+    <div class="card-header">
+        <h4>Product Details</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Games.NomeGioco)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Games.NomeGioco)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Games.NomeGioco)
-        </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Immagine)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Immagine)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descrizione)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descrizione)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Immagine)
-        </dt>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Prezzo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Prezzo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Immagine)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Descrizione)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descrizione)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prezzo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rarita)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rarita)
-        </dd>
-
-    </dl>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Rarita)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Rarita)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-primary" href="@Url.Action("Edit", new { id = Model.ArticoloID })">Edit</a>
+        <a class="btn btn-secondary" href="@Url.Action("Index")">Back to List</a>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ArticoloID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

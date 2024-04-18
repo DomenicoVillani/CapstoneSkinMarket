@@ -19,6 +19,7 @@ namespace CapstoneSkinMarket.Controllers
         private DBContext db = new DBContext();
 
         // GET: OrdersProducts
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var ordersProducts = db.OrdersProducts.Include(o => o.Orders).Include(o => o.Products);
@@ -26,6 +27,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: OrdersProducts/Details/5
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,6 +47,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: OrdersProducts/Create
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create()
         {
             ViewBag.OrdineID = new SelectList(db.Orders, "OrdineID", "Note");
@@ -57,6 +60,7 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create([Bind(Include = "ArticoloID,OrdineID")] OrdersProducts ordersProducts)
         {
             var ordine = db.OrdersProducts
@@ -86,6 +90,7 @@ namespace CapstoneSkinMarket.Controllers
         }
         //carrello cookie
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult AddToCart(int? id)
         {
             if (id == null)
@@ -153,6 +158,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ActionResult Cart()
         {
             List<Cart> cart = new List<Cart>();
@@ -176,6 +182,7 @@ namespace CapstoneSkinMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> CreateOrderFromCart(Orders ordini)
         {
             if (ModelState.IsValid)
@@ -323,6 +330,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult SvuotaCarrello()
         {
             // Rimuovi il cookie del carrello per l'utente corrente
@@ -337,6 +345,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult RimuoviDallCarrello(int articoloId)
         {
             // Recupera l'elenco degli articoli attualmente nel carrello dal cookie
@@ -370,6 +379,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult AggiornaQuantita(int id, string operazione)
         {
             // Recupera l'elenco degli articoli attualmente nel carrello dal cookie
@@ -404,6 +414,7 @@ namespace CapstoneSkinMarket.Controllers
 
 
         // GET: OrdersProducts/Edit/5
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -425,6 +436,7 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Edit([Bind(Include = "ArticoloID,OrdineID")] OrdersProducts ordersProducts)
         {
             if (ModelState.IsValid)
@@ -439,6 +451,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: OrdersProducts/Delete/5
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -456,6 +469,7 @@ namespace CapstoneSkinMarket.Controllers
         // POST: OrdersProducts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult DeleteConfirmed(int id)
         {
             OrdersProducts ordersProducts = db.OrdersProducts.Find(id);

@@ -45,6 +45,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.GiocoID = new SelectList(db.Games, "GiocoID", "NomeGioco");
@@ -56,6 +57,7 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "ArticoloID,Nome,Immagine,Descrizione,Prezzo,Rarita,GiocoID")] Products products, HttpPostedFileBase Immagine)
         {
             if (ModelState.IsValid)
@@ -89,6 +91,7 @@ namespace CapstoneSkinMarket.Controllers
 
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,6 +112,7 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "ArticoloID,Nome,Immagine,Descrizione,Prezzo,Rarita,GiocoID")] Products products)
         {
             if (ModelState.IsValid)
@@ -122,6 +126,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,8 +142,10 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // POST: Products/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Products products = db.Products.Find(id);

@@ -16,18 +16,20 @@ namespace CapstoneSkinMarket.Controllers
         private DBContext db = new DBContext();
 
         // GET: Users
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Users.ToList());
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Search(string searchTerm)
         {
             var userSearch = db.Users.Where(p => p.Username.Contains(searchTerm)).ToList();
             return View("Index", userSearch);
         }
         // GET: Users/Details/5
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -43,12 +45,14 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Users/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Users/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono")] Users users)
@@ -81,6 +85,7 @@ namespace CapstoneSkinMarket.Controllers
 
 
         // GET: Users/Edit/5
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,6 +105,7 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Edit([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono")] Users user, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
@@ -121,6 +127,7 @@ namespace CapstoneSkinMarket.Controllers
 
 
         // GET: Users/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,6 +143,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // POST: Users/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

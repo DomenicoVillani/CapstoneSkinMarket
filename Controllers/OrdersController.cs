@@ -15,7 +15,7 @@ namespace CapstoneSkinMarket.Controllers
         private DBContext db = new DBContext();
 
         // GET: Orders
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Users)
@@ -24,6 +24,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Orders/Details/5
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,6 +42,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize(Roles = "Admin, User")]
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Username");
@@ -66,6 +68,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +89,7 @@ namespace CapstoneSkinMarket.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "OrdineID,UserID,TotalePrezzo,Note,DataOrdine")] Orders orders)
         {
             if (ModelState.IsValid)
@@ -99,6 +103,7 @@ namespace CapstoneSkinMarket.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +121,7 @@ namespace CapstoneSkinMarket.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Orders orders = db.Orders.Find(id);
