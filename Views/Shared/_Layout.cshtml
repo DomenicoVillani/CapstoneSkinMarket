@@ -29,9 +29,7 @@
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Prodotti", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Carrello", "Cart", "OrdersProducts", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Il tuo profilo!", "Details", "Users", new { id = User.Identity.Name }, new { @class = "nav-link" })</li>
                         <li>
                             <form class="form-inline my-2 my-lg-0" action="@Url.Action("Search", "Products")" method="get">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Cerca prodotti" aria-label="Search" name="searchTerm">
@@ -57,7 +55,10 @@
                 <ul class="navbar-nav ml-auto">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item"><a href="@Url.Action("Logout", "Auth")" class="btn btn-outline-light pacifico-regular">Logout</a></li>
+                        <li class="nav-item"><a href="@Url.Action("Cart", "OrdersProducts")"><img src="~/Stile/Img/Propic/shopping-cart.png" height="30" width="30"/></a></li>
+                        <li class="nav-item"><a href="@Url.Action("Details", "Users", new {id = User.Identity.Name})"><img src="~/Stile/Img/Propic/PicDefault.png" height="30" width="30" class="rounded-pill" /></a></li>
+                        <li class="nav-item"><a href="@Url.Action("Logout", "Auth")"><img src="~/Stile/Img/Propic/logout.png" height="30" width="30" /></a></li>
+
                     }
                     else
                     {

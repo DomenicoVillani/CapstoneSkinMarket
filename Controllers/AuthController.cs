@@ -26,7 +26,6 @@ namespace CapstoneSkinMarket.Controllers
                 TempData["ErrorLogin"] = true;
                 return RedirectToAction("Login");
             }
-
             FormsAuthentication.SetAuthCookie(loggedUser.UserID.ToString(), true);
             return RedirectToAction("Index", "Home");
         }
