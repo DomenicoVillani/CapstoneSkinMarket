@@ -493,13 +493,17 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Stile\Css\Home.css" />
     <Content Include="Stile\Img\250px-Second_opinion.png" />
     <Content Include="Stile\Img\350px-Demoman_taunt_laugh.png" />
     <Content Include="Stile\Img\akcs2.png" />
     <Content Include="Stile\Img\akcs22.png" />
+    <Content Include="Stile\Img\BulletTexture.png" />
     <Content Include="Stile\Img\buyNow.png" />
     <Content Include="Stile\Img\contact.png" />
     <Content Include="Stile\Img\DoppieBerettecs2.png" />
+    <Content Include="Stile\Img\down-arrow.png" />
+    <Content Include="Stile\Img\down-chevron.png" />
     <Content Include="Stile\Img\fortnite-new-galaxy-skin-gm0.png" />
     <Content Include="Stile\Img\Gemini_Generated_Image.jpeg" />
     <Content Include="Stile\Img\joinus.png" />
@@ -509,6 +513,10 @@
     <Content Include="Stile\Img\Propic\logout.png" />
     <Content Include="Stile\Img\Propic\PicDefault.png" />
     <Content Include="Stile\Img\Propic\shopping-cart.png" />
+    <Content Include="Stile\Img\RadialOrange.png" />
+    <Content Include="Stile\Img\RadialPurple.png" />
+    <Content Include="Stile\Img\SkinBazaarLogo.png" />
+    <Content Include="Stile\Img\SkinBazaarMain.png" />
     <Content Include="Stile\Img\skinDesertcs2.png" />
     <Content Include="Stile\Img\usp2cs2.png" />
     <Content Include="Stile\Img\Uspcs2.png" />
@@ -572,7 +580,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Stile\Css\" />
     <Folder Include="Views\RoleManager\" />
   </ItemGroup>
   <ItemGroup>

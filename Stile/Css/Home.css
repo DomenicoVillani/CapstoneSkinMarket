@@ -1,0 +1,133 @@
+﻿html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #252525;
+    color: rgb(253,251,234);
+}
+
+.div-main-home {
+    background-image: url('../../stile/img/bullettexture.png');
+    background-color: #151515;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.img-size-main {
+    width: 50%;
+}
+
+.img-arrow-main {
+    width: 5%;
+    animation: bounce 2s infinite;
+}
+
+.img-arrow-main:hover {
+    cursor:pointer;
+}
+
+.container-scritta-img {
+    position: relative;
+    text-align: center;
+}
+
+.overlay-title {
+    font-size: 6vw; /* Imposta la dimensione del font relativa alla larghezza del viewport */
+    position: absolute;
+    top: 57vh; /* Posizione di partenza, buona per molti desktop */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.div-bord {
+    border-radius: 25px;
+    -webkit-box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.26);
+    -moz-box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.26);
+    box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.5);
+}
+
+.margin-div-bord{
+    padding:1%;
+}
+
+/* Media queries per adattare la posizione e la dimensione del font su dispositivi mobili */
+@media (max-width: 600px) { /* Per dispositivi mobili */
+    .overlay-title {
+        font-size: 8vw; /* Dimensione del font più grande per la leggibilità su schermi piccoli */
+        top: 24vh; /* Posizione più alta per evitare sovrapposizioni scomode */
+    }
+
+    .sub-title{
+        font-size:3vw;
+    }
+}
+
+@media (min-width: 601px) { /* Per tablet */
+    .overlay-title {
+        font-size: 7vw; /* Un compromesso tra mobile e desktop */
+        top: 25vh; /* Posizione intermedia */
+    }
+
+    .sub-title {
+        font-size: 3.5vw;
+    }
+}
+
+@media (min-width: 750px) { /* Per tablet */
+    .overlay-title {
+        font-size: 7vw; /* Un compromesso tra mobile e desktop */
+        top: 31vh; /* Posizione intermedia */
+    }
+
+    .sub-title {
+        font-size: 2vw;
+    }
+}
+
+
+@media (min-width: 991px) {
+    .div-25 {
+        width: 25%;
+    }
+
+    .overlay-title {
+        font-size: 7vw; /* Un compromesso tra mobile e desktop */
+        top: 41vh; /* Posizione intermedia */
+    }
+}
+
+@media (min-width: 1025px) { /* Per desktop grandi e monitor più grandi */
+    .overlay-title {
+        font-size: 5vw; /* Dimensione del font ridotta per grandi display */
+        top: 43vh; /* Posizione più bassa adatta a schermi grandi */
+    }
+}
+
+@media (min-width: 1199px) { /* Per desktop grandi e monitor più grandi */
+    .overlay-title {
+        font-size: 5vw; /* Dimensione del font ridotta per grandi display */
+        top: 50vh; /* Posizione più bassa adatta a schermi grandi */
+    }
+}
+
+@media (min-width: 1399px) { /* Per desktop grandi e monitor più grandi */
+    .overlay-title {
+        font-size: 5vw; /* Dimensione del font ridotta per grandi display */
+        top:58vh; /* Posizione più bassa adatta a schermi grandi */
+    }
+}
+
+@keyframes bounce {
+    0%{
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
