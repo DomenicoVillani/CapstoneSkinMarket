@@ -495,10 +495,12 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Stile\Css\Home.css" />
     <Content Include="Stile\Css\Layout.css" />
+    <Content Include="Stile\Css\Products.css" />
     <Content Include="Stile\Img\250px-Second_opinion.png" />
     <Content Include="Stile\Img\350px-Demoman_taunt_laugh.png" />
     <Content Include="Stile\Img\akcs2.png" />
     <Content Include="Stile\Img\akcs22.png" />
+    <Content Include="Stile\Img\arrow-right.png" />
     <Content Include="Stile\Img\BulletTexture.png" />
     <Content Include="Stile\Img\buyNow.png" />
     <Content Include="Stile\Img\contact.png" />
@@ -519,6 +521,7 @@
     <Content Include="Stile\Img\SkinBazaarLogo.png" />
     <Content Include="Stile\Img\SkinBazaarMain.png" />
     <Content Include="Stile\Img\skinDesertcs2.png" />
+    <Content Include="Stile\Img\Test3.png" />
     <Content Include="Stile\Img\usp2cs2.png" />
     <Content Include="Stile\Img\Uspcs2.png" />
     <Content Include="Stile\Img\xm1014.png" />

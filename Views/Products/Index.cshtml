@@ -1,196 +1,207 @@
 ﻿@model IEnumerable<CapstoneSkinMarket.Models.Products>
+<link href="~/Stile/Css/Products.css" rel="stylesheet" />
+
 
 @{
     ViewBag.Title = "Index";
     var groupedByGameName = Model.GroupBy(p => p.Games.NomeGioco).OrderBy(g => g.Key);
 }
-
-@if (User.IsInRole("Admin"))
-{
-    <h2>Index</h2>
-    foreach (var gameGroup in groupedByGameName)
+<body>
+    @if (User.IsInRole("Admin"))
     {
-        <h2>@gameGroup.Key</h2>
-        <div class="row">
-            @{
-                int productCount = 0;
-            }
-            @foreach (var item in gameGroup)
-            {
-                if (productCount < 10) // Limita a 10 prodotti
-                {
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                            {
-                                <img class="card-img-top" src="@item.Immagine" alt="Product Image">
-                            }
-                            else
-                            {
-                                <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
-                            }
-                            <div class="card-body">
-                                <p class="card-title">@item.Nome</p>
-                                <p class="card-text">@item.Games.NomeGioco</p>
-                                <p class="card-text">@item.Descrizione</p>
-                                <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                                <p class="card-text">@item.Rarita</p>
-                                <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
-                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                                <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                    productCount++; // Incrementa il contatore
+        <h2>Index</h2>
+        foreach (var gameGroup in groupedByGameName)
+        {
+            <h2>@gameGroup.Key</h2>
+            <div class="row">
+                @{
+                    int productCount = 0;
                 }
-            }
-            @if (gameGroup.Count() > 10) // Se ci sono più di 10 prodotti, mostra il link
-            {
-                <div class="col-12 mt-4">
-                    @if (gameGroup.Key == "Counter-Strike 2")
-                    {
-                        <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-                    else if (gameGroup.Key == "Team Fortress 2")
-                    {
-                        <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-                    else if (gameGroup.Key == "Fortnite")
-                    {
-                        <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-
-                </div>
-            }
-        </div>
-    }
-}
-else if (User.IsInRole("User"))
-{
-    <h2>Index</h2>
-    foreach (var gameGroup in groupedByGameName)
-    {
-        <h2>@gameGroup.Key</h2>
-        <div class="row">
-            @{
-                int productCount = 0;
-            }
-            @foreach (var item in gameGroup)
-            {
-                if (productCount < 10) // Limita a 10 prodotti
+                @foreach (var item in gameGroup)
                 {
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                            {
-                                <img class="card-img-top" src="@item.Immagine" alt="Product Image">
-                            }
-                            else
-                            {
-                                <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
-                            }
-                            <div class="card-body">
-                                <p class="card-title">@item.Nome</p>
-                                <p class="card-text">@item.Games.NomeGioco</p>
-                                <p class="card-text">@item.Descrizione</p>
-                                <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                                <p class="card-text">@item.Rarita</p>
-                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
+                    if (productCount < 3) // Limita a 10 prodotti
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    <input type="hidden" name="id" value="@item.ArticoloID" />
-                                    <input class="btn btn-success rounded-pill" type="submit" value="Aggiungi all'ordine" />
+                                    <img class="card-img-top" src="@item.Immagine" alt="Product Image">
                                 }
+                                else
+                                {
+                                    <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
+                                }
+                                <div class="card-body">
+                                    <p class="card-title">@item.Nome</p>
+                                    <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                                    <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                                    <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    productCount++; // Incrementa il contatore
+                        productCount++; // Incrementa il contatore
+                    }
                 }
-            }
-            @if (gameGroup.Count() > 10) // Se ci sono più di 10 prodotti, mostra il link
-            {
-                <div class="col-12 mt-4">
-                    @if (gameGroup.Key == "Counter-Strike 2")
-                    {
-                        <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-                    else if (gameGroup.Key == "Team Fortress 2")
-                    {
-                        <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-                    else if (gameGroup.Key == "Fortnite")
-                    {
-                        <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-
-                </div>
-            }
-        </div>
-    }
-}
-
-else
-{
-    <h2>Loggati per poter inserire i prodotti nel carrello</h2>
-    foreach (var gameGroup in groupedByGameName)
-    {
-        <h2>@gameGroup.Key</h2>
-        <div class="row">
-            @{
-                int productCount = 0;
-            }
-            @foreach (var item in gameGroup)
-            {
-                if (productCount < 10) // Limita a 10 prodotti
+                @if (gameGroup.Count() > 3) // Se ci sono più di 10 prodotti, mostra il link
                 {
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                            {
-                                <img class="card-img-top" src="@item.Immagine" alt="Product Image">
-                            }
-                            else
-                            {
-                                <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
-                            }
-                            <div class="card-body">
-                                <p class="card-title">@item.Nome</p>
-                                <p class="card-text">@item.Games.NomeGioco</p>
-                                <p class="card-text">@item.Descrizione</p>
-                                <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                                <p class="card-text">@item.Rarita</p>
-                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                    <div class="col-12 mt-4">
+                        @if (gameGroup.Key == "Counter-Strike 2")
+                        {
+                            <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                        }
+                        else if (gameGroup.Key == "Team Fortress 2")
+                        {
+                            <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                        }
+                        else if (gameGroup.Key == "Fortnite")
+                        {
+                            <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                        }
+
+                    </div>
+                }
+            </div>
+        }
+    }
+    else if (User.IsInRole("User"))
+    {
+        <h2>Index</h2>
+        foreach (var gameGroup in groupedByGameName)
+        {
+            <h2>@gameGroup.Key</h2>
+            <div class="row">
+                @{
+                    int productCount = 0;
+                }
+                @foreach (var item in gameGroup)
+                {
+                    if (productCount < 3) // Limita a 10 prodotti
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <img class="card-img-top" src="@item.Immagine" alt="Product Image">
+                                }
+                                else
+                                {
+                                    <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
+                                }
+                                <div class="card-body">
+                                    <p class="card-title">@item.Nome</p>
+                                    <p class="card-text">@item.Games.NomeGioco</p>
+                                    <p class="card-text">@item.Descrizione</p>
+                                    <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                                    <p class="card-text">@item.Rarita</p>
+                                    <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
+                                    {
+                                        <input type="hidden" name="id" value="@item.ArticoloID" />
+                                        <input class="btn btn-success rounded-pill" type="submit" value="Aggiungi all'ordine" />
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    productCount++; // Incrementa il contatore
+                        productCount++; // Incrementa il contatore
+                    }
                 }
-            }
-            @if (gameGroup.Count() > 10) // Se ci sono più di 10 prodotti, mostra il link
-            {
-                <div class="col-12 mt-4">
-                    @if (gameGroup.Key == "Counter-Strike 2")
-                    {
-                        <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-                    else if (gameGroup.Key == "Team Fortress 2")
-                    {
-                        <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
-                    else if (gameGroup.Key == "Fortnite")
-                    {
-                        <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
-                    }
+                @if (gameGroup.Count() > 3) // Se ci sono più di 10 prodotti, mostra il link
+                {
+                    <div class="col-12 mt-4">
+                        @if (gameGroup.Key == "Counter-Strike 2")
+                        {
+                            <a href="@Url.Action("Cs", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                        }
+                        else if (gameGroup.Key == "Team Fortress 2")
+                        {
+                            <a href="@Url.Action("Tf", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                        }
+                        else if (gameGroup.Key == "Fortnite")
+                        {
+                            <a href="@Url.Action("Fortnite", "Filtri")" class="btn btn-primary">Mostra tutti i prodotti</a>
+                        }
 
-                </div>
-            }
-        </div>
+                    </div>
+                }
+            </div>
+        }
     }
-}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+    else
+    {
+        <h2>Loggati per poter inserire i prodotti nel carrello</h2>
+        foreach (var gameGroup in groupedByGameName)
+        {
+            <div class="d-flex justify-content-between">
+                <h2>@gameGroup.Key</h2>
+                @if (gameGroup.Count() > 3) // Se ci sono più di 10 prodotti, mostra il link
+                {
+                    <div>
+                        @if (gameGroup.Key == "Counter-Strike 2")
+                        {
+                            <div>
+                                <a href="@Url.Action("Cs", "Filtri")" class="me-3">Mostra tutti i prodotti</a>
+                                <a href="@Url.Action("Cs", "Filtri")"><img src="~/Stile/Img/arrow-right.png" width="25" height="25" class="img-arrow"/></a>
+                            </div>
+
+                        }
+                        else if (gameGroup.Key == "Team Fortress 2")
+                        {
+                            <div>
+                                <a href="@Url.Action("Tf", "Filtri")" class="me-3">Mostra tutti i prodotti</a>
+                                <a href="@Url.Action("Tf", "Filtri")"><img src="~/Stile/Img/arrow-right.png" width="25" height="25" class="img-arrow"/></a>
+                            </div>
+                        }
+                        else if (gameGroup.Key == "Fortnite")
+                        {
+                            <div>
+                                <a href="@Url.Action("Fortnite", "Filtri")" class="me-3">Mostra tutti i prodotti</a>
+                                <a href="@Url.Action("Fortnite", "Filtri")"><img src="~/Stile/Img/arrow-right.png" width="25" height="25" class="img-arrow"/></a>
+                            </div>
+                        }
+
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                @{
+                    int productCount = 0;
+                }
+                @foreach (var item in gameGroup)
+                {
+                    if (productCount < 3) // Limita a 10 prodotti
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card sfondo-card">
+                                @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <img class="card-img-top" src="@item.Immagine" alt="Product Image">
+                                }
+                                else
+                                {
+                                    <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
+                                }
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-title">@item.Nome</p>
+                                        <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                                    </div>
+                                    <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        productCount++; // Incrementa il contatore
+                    }
+                }
+            </div>
+        }
+    }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
     $(document).ready(function() {
         $('form[id^="add-to-cart-form-"]').submit(function(e) {
             e.preventDefault();
@@ -220,4 +231,5 @@ else
             });
         });
     });
-</script>
+    </script>
+</body>
