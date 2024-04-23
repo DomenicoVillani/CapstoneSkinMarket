@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<CapstoneSkinMarket.Models.Products>
-<link rel="stylesheet" href="~/Stile/Css/Products.css"  />
+<link rel="stylesheet" href="~/Stile/Css/Products.css" />
 
 @{
     ViewBag.Title = "Index";
@@ -8,6 +8,34 @@
 <body>
     @if (User.IsInRole("Admin"))
     {
+        <div class="d-flex justify-content-center">
+            <div class="dropdown-center me-5">
+                <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Prezzo
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item text-white" href="@Url.Action("MenoDieci", "Filtri")"> &lt;10&euro; </a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("DieciVenticinque", "Filtri")"> 10&euro; - 25&euro; </a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("VenticinqueSettantacinque", "Filtri")"> 25&euro; - 75&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("SettantacinqueCentocinquanta", "Filtri")"> 75&euro; - 150&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("CentocinquantaCinquecento", "Filtri")"> 150&euro; - 500&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
+                </ul>
+            </div>
+            <div class="dropdown-center">
+                <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Rarità
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item text-white" href="@Url.Action("DefaultRare", "Filtri")">Default</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Rara", "Filtri")">Rara</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Ultra", "Filtri")">Ultra</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("UltraRara", "Filtri")">Ultra rara</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("RaraSegreta", "Filtri")">Rara segreto</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
+                </ul>
+            </div>
+        </div>
         foreach (var gameGroup in groupedByGameName)
         {
             <div class="d-flex justify-content-between mb-5 mt-5">
@@ -78,12 +106,12 @@
                     Prezzo
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item text-white" href="#"> &lt;10&euro; </a></li>
-                    <li><a class="dropdown-item text-white" href="#"> 10&euro; - 25&euro; </a></li>
-                    <li><a class="dropdown-item text-white" href="#"> 25&euro; - 75&euro;</a></li>
-                    <li><a class="dropdown-item text-white" href="#"> 75&euro; - 150&euro;</a></li>
-                    <li><a class="dropdown-item text-white" href="#"> 150&euro; - 500&euro;</a></li>
-                    <li><a class="dropdown-item text-white" href="#"> &gt;500&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("MenoDieci", "Filtri")"> &lt;10&euro; </a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("DieciVenticinque", "Filtri")"> 10&euro; - 25&euro; </a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("VenticinqueSettantacinque", "Filtri")"> 25&euro; - 75&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("SettantacinqueCentocinquanta", "Filtri")"> 75&euro; - 150&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("CentocinquantaCinquecento", "Filtri")"> 150&euro; - 500&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
                 </ul>
             </div>
             <div class="dropdown-center">
@@ -91,9 +119,12 @@
                     Rarità
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item text-white" href="#">Action</a></li>
-                    <li><a class="dropdown-item text-white" href="#">Another action</a></li>
-                    <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("DefaultRare", "Filtri")">Default</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Rara", "Filtri")">Rara</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Ultra", "Filtri")">Ultra</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("UltraRara", "Filtri")">Ultra rara</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("RaraSegreta", "Filtri")">Rara segreto</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
                 </ul>
             </div>
         </div>
@@ -168,6 +199,34 @@
     else
     {
         <h2 class="text-center">Effettua l'accesso per poter acquistare i nostri prodotti!</h2>
+        <div class="d-flex justify-content-center">
+            <div class="dropdown-center me-5">
+                <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Prezzo
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item text-white" href="@Url.Action("MenoDieci", "Filtri")"> &lt;10&euro; </a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("DieciVenticinque", "Filtri")"> 10&euro; - 25&euro; </a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("VenticinqueSettantacinque", "Filtri")"> 25&euro; - 75&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("SettantacinqueCentocinquanta", "Filtri")"> 75&euro; - 150&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("CentocinquantaCinquecento", "Filtri")"> 150&euro; - 500&euro;</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
+                </ul>
+            </div>
+            <div class="dropdown-center">
+                <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Rarità
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item text-white" href="@Url.Action("DefaultRare", "Filtri")">Default</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Rara", "Filtri")">Rara</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Ultra", "Filtri")">Ultra</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("UltraRara", "Filtri")">Ultra rara</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("RaraSegreta", "Filtri")">Rara segreto</a></li>
+                    <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
+                </ul>
+            </div>
+        </div>
         foreach (var gameGroup in groupedByGameName)
         {
             <div class="d-flex justify-content-between mb-5 mt-5">
