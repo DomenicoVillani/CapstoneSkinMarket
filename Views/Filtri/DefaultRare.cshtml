@@ -22,7 +22,7 @@
                 <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
             </ul>
         </div>
-        <div class="dropdown-center">
+        <div class="dropdown-center me-5">
             <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Rarità
             </button>
@@ -35,15 +35,18 @@
                 <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
             </ul>
         </div>
+        <div>
+            <a class="btn btn-viola" href="@Url.Action("Create", "Products")">Crea nuovo prodotto</a>
+        </div>
     </div>
-    <p>@Html.ActionLink("Create New", "Create")</p>
+
     foreach (var gameGroup in groupedByGameName)
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
                     <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
@@ -58,7 +61,7 @@
                                 <p class="card-title">@item.Nome</p>
                                 <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between flex-wrap">
                                 <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-viola">Modifica</a>
                                 <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
                                 <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-viola">Elimina</a>
@@ -107,7 +110,7 @@ else if (User.IsInRole("User"))
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
                     <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
@@ -122,12 +125,12 @@ else if (User.IsInRole("User"))
                                 <p class="card-title">@item.Nome</p>
                                 <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="card-buttons d-flex justify-content-between flex-wrap">
                                 <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
                                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
                                 {
                                     <input type="hidden" name="id" value="@item.ArticoloID" />
-                                    <input class="btn btn-viola" type="submit" value="Aggiungi all'ordine" />
+                                    <input class="btn btn-viola btn-aggiungi" type="submit" value="Aggiungi all'ordine" />
                                 }
                             </div>
                         </div>
@@ -174,7 +177,7 @@ else
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
                     <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {

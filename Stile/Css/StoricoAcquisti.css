@@ -6,7 +6,6 @@
     background-position: center top;
     background-size: 100% auto;
 }
-
 .sfondo-card {
     background-color: transparent;
     color: #FDFBEA;
@@ -21,25 +20,6 @@
     transition: 0.5s;
 }
 
-.prezzo {
-    color: #F3700C;
-}
-
-.img-arrow {
-    animation: bounce 2s infinite;
-}
-
-.btn-viola {
-    color: #FDFBEA; /* Colore del testo */
-    background-color: transparent; /* Sfondo trasparente inizialmente */
-    border-color: #C34BDC; /* Colore del bordo */
-}
-
-.btn-viola:hover {
-    background-color: #C34BDC; /* Colore di sfondo al hover */
-    border-color: #C34BDC; /* Colore del bordo al hover */
-}
-
 .btn-dettagli {
     color: #FDFBEA; /* Colore del testo */
     background-color: transparent; /* Sfondo trasparente inizialmente */
@@ -51,32 +31,13 @@
     border-color: #F3700C; /* Colore del bordo */
 }
 
-.dropdown-menu li a:hover {
-    background-color: transparent !important;
-    color: inherit !important;
-}
-
-.p-error-search {
-    color: #C34BDC;
-    font-size:2em;
+.text-orange-p {
+    color: #F3700C;
+    font-size:1em;
     font-weight:bold;
 }
 
-.text-orange-span {
-    color: #F3700C;
+.text-purple-p {
+    color: #C34BDC;
+    font-weight: bold;
 }
-
-@keyframes bounce {
-    0% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    100% {
-        transform: translateX(-15);
-    }
-}
-

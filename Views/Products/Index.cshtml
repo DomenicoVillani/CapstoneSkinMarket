@@ -84,7 +84,7 @@
                                         <p class="card-title">@item.Nome</p>
                                         <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
                                     </div>
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between flex-wrap">
                                         <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-viola">Modifica</a>
                                         <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
                                         <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-viola">Elimina</a>
@@ -178,12 +178,12 @@
                                         <p class="card-title">@item.Nome</p>
                                         <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
                                     </div>
-                                    <div class="d-flex justify-content-between">
+                                    <div class="card-buttons d-flex justify-content-between flex-wrap">
                                         <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
                                         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
                                         {
                                             <input type="hidden" name="id" value="@item.ArticoloID" />
-                                            <input class="btn btn-viola" type="submit" value="Aggiungi all'ordine" />
+                                            <input class="btn btn-viola btn-aggiungi" type="submit" value="Aggiungi all'ordine" />
                                         }
                                     </div>
                                 </div>

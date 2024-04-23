@@ -24,10 +24,19 @@ namespace CapstoneSkinMarket.Controllers
 
         public ActionResult Search(string searchTerm)
         {
-            var products = db.Products.Where(p => p.Nome.Contains(searchTerm)).ToList();
-            return View("Index", products);
+            List<Products> products = new List<Products>();
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                products = db.Products.Where(p => p.Nome.Contains(searchTerm)).ToList();
+            }
+            return View("SearchResults", products);
         }
 
+        public ActionResult SearchResults()
+        {
+            return View();
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
