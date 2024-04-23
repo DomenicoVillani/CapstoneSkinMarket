@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<CapstoneSkinMarket.Models.Products>
+
+<link href="~/Stile/Css/Filtri.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     var groupedByGameName = Model.GroupBy(p => p.Games.NomeGioco).OrderBy(g => g.Key);
@@ -6,16 +8,46 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <h2>Index</h2>
-    <p>@Html.ActionLink("Create New", "Create")</p>
+    <div class="d-flex justify-content-center">
+        <div class="dropdown-center me-5">
+            <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Prezzo
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item text-white" href="@Url.Action("MenoDieci", "Filtri")"> &lt;10&euro; </a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("DieciVenticinque", "Filtri")"> 10&euro; - 25&euro; </a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("VenticinqueSettantacinque", "Filtri")"> 25&euro; - 75&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("SettantacinqueCentocinquanta", "Filtri")"> 75&euro; - 150&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("CentocinquantaCinquecento", "Filtri")"> 150&euro; - 500&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
+            </ul>
+        </div>
+        <div class="dropdown-center me-5">
+            <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Rarità
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item text-white" href="@Url.Action("DefaultRare", "Filtri")">Default</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Rara", "Filtri")">Rara</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Ultra", "Filtri")">Ultra</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("UltraRara", "Filtri")">Ultra rara</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("RaraSegreta", "Filtri")">Rara segreto</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
+            </ul>
+        </div>
+        <div>
+            <a class="btn btn-viola" href="@Url.Action("Create", "Products")">Crea nuovo prodotto</a>
+        </div>
+    </div>
+
     foreach (var gameGroup in groupedByGameName)
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
                             <img class="card-img-top" src="@item.Immagine" alt="Product Image">
@@ -25,14 +57,15 @@
                             <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
                         }
                         <div class="card-body">
-                            <p class="card-title">@item.Nome</p>
-                            <p class="card-text">@item.Games.NomeGioco</p>
-                            <p class="card-text">@item.Descrizione</p>
-                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                            <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-primary">Edit</a>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                            <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-danger">Delete</a>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-title">@item.Nome</p>
+                                <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="@Url.Action("Edit", new { id = item.ArticoloID })" class="btn btn-viola">Modifica</a>
+                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
+                                <a href="@Url.Action("Delete", new { id = item.ArticoloID })" class="btn btn-viola">Elimina</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -42,15 +75,43 @@
 }
 else if (User.IsInRole("User"))
 {
-    <h2>Index</h2>
+
+    <div class="d-flex justify-content-center">
+        <div class="dropdown-center me-5">
+            <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Prezzo
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item text-white" href="@Url.Action("MenoDieci", "Filtri")"> &lt;10&euro; </a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("DieciVenticinque", "Filtri")"> 10&euro; - 25&euro; </a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("VenticinqueSettantacinque", "Filtri")"> 25&euro; - 75&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("SettantacinqueCentocinquanta", "Filtri")"> 75&euro; - 150&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("CentocinquantaCinquecento", "Filtri")"> 150&euro; - 500&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
+            </ul>
+        </div>
+        <div class="dropdown-center">
+            <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Rarità
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item text-white" href="@Url.Action("DefaultRare", "Filtri")">Default</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Rara", "Filtri")">Rara</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Ultra", "Filtri")">Ultra</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("UltraRara", "Filtri")">Ultra rara</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("RaraSegreta", "Filtri")">Rara segreto</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
+            </ul>
+        </div>
+    </div>
     foreach (var gameGroup in groupedByGameName)
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
                             <img class="card-img-top" src="@item.Immagine" alt="Product Image">
@@ -60,17 +121,18 @@ else if (User.IsInRole("User"))
                             <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
                         }
                         <div class="card-body">
-                            <p class="card-title">@item.Nome</p>
-                            <p class="card-text">@item.Games.NomeGioco</p>
-                            <p class="card-text">@item.Descrizione</p>
-                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                            <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
-                            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
-                            {
-                                <input type="hidden" name="id" value="@item.ArticoloID" />
-                                <input class="btn btn-success rounded-pill" type="submit" value="Aggiungi all'ordine" />
-                            }
+                            <div class="d-flex justify-content-between">
+                                <p class="card-title">@item.Nome</p>
+                                <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = $"add-to-cart-form-{item.ArticoloID}" }))
+                                {
+                                    <input type="hidden" name="id" value="@item.ArticoloID" />
+                                    <input class="btn btn-viola" type="submit" value="Aggiungi all'ordine" />
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,14 +143,42 @@ else if (User.IsInRole("User"))
 else
 {
     <h2>Loggati per poter inserire i prodotti nel carrello</h2>
+    <div class="d-flex justify-content-center">
+        <div class="dropdown-center me-5">
+            <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Prezzo
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item text-white" href="@Url.Action("MenoDieci", "Filtri")"> &lt;10&euro; </a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("DieciVenticinque", "Filtri")"> 10&euro; - 25&euro; </a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("VenticinqueSettantacinque", "Filtri")"> 25&euro; - 75&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("SettantacinqueCentocinquanta", "Filtri")"> 75&euro; - 150&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("CentocinquantaCinquecento", "Filtri")"> 150&euro; - 500&euro;</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
+            </ul>
+        </div>
+        <div class="dropdown-center">
+            <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Rarità
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item text-white" href="@Url.Action("DefaultRare", "Filtri")">Default</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Rara", "Filtri")">Rara</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Ultra", "Filtri")">Ultra</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("UltraRara", "Filtri")">Ultra rara</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("RaraSegreta", "Filtri")">Rara segreto</a></li>
+                <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
+            </ul>
+        </div>
+    </div>
     foreach (var gameGroup in groupedByGameName)
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
                             <img class="card-img-top" src="@item.Immagine" alt="Product Image">
@@ -98,12 +188,13 @@ else
                             <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + item.Immagine)" alt="Product Image">
                         }
                         <div class="card-body">
-                            <p class="card-title">@item.Nome</p>
-                            <p class="card-text">@item.Games.NomeGioco</p>
-                            <p class="card-text">@item.Descrizione</p>
-                            <p class="card-text">@Html.Raw(item.Prezzo.ToString("C"))</p>
-                            <p class="card-text">@item.Rarita</p>
-                            <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-secondary">Details</a>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-title">@item.Nome</p>
+                                <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="@Url.Action("Details", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -128,7 +219,7 @@ else
                         icon: 'success',
                         title: 'Successo!',
                         text: 'Prodotto aggiunto al carrello!',
-                        confirmButtonColor: '#3085d6',
+                        confirmButtonColor: '#C34BDC',
                         confirmButtonText: 'OK'
                     });
                 },
@@ -145,4 +236,4 @@ else
         });
     });
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

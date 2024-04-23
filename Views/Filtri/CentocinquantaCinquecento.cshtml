@@ -22,7 +22,7 @@
                 <li><a class="dropdown-item text-white" href="@Url.Action("CinquecentoPiu", "Filtri")"> &gt;500&euro;</a></li>
             </ul>
         </div>
-        <div class="dropdown-center">
+        <div class="dropdown-center me-5">
             <button class="btn btn-viola dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Rarità
             </button>
@@ -35,15 +35,18 @@
                 <li><a class="dropdown-item text-white" href="@Url.Action("Leggendaria", "Filtri")">Leggendaria</a></li>
             </ul>
         </div>
+        <div>
+            <a class="btn btn-viola" href="@Url.Action("Create", "Products")">Crea nuovo prodotto</a>
+        </div>
     </div>
-    <p>@Html.ActionLink("Create New", "Create")</p>
+
     foreach (var gameGroup in groupedByGameName)
     {
         <h2>@gameGroup.Key</h2>
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
                     <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
@@ -107,7 +110,7 @@ else if (User.IsInRole("User"))
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
                     <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
@@ -174,7 +177,7 @@ else
         <div class="row">
             @foreach (var item in gameGroup)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
                     <div class="card sfondo-card">
                         @if (item.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         {
