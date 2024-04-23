@@ -51,6 +51,11 @@
     border-color: #F3700C; /* Colore del bordo */
 }
 
+.dropdown-menu li a:hover {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 @keyframes bounce {
     0% {
         transform: translateX(0);

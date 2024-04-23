@@ -1,0 +1,44 @@
+﻿body {
+    background-color: #252525;
+    color: rgb(253,251,234);
+}
+
+.btn-viola {
+    color: #FDFBEA; /* Colore del testo */
+    background-color: transparent; /* Sfondo trasparente inizialmente */
+    border-color: #C34BDC; /* Colore del bordo */
+}
+
+.btn-viola:hover {
+    background-color: #C34BDC; /* Colore di sfondo al hover */
+    border-color: #C34BDC; /* Colore del bordo al hover */
+}
+
+.register-link {
+    color: #F3700C;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+span {
+    color: #F3700C;
+    text-decoration: underline
+}
+
+h2 {
+    font-size: 4em;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.colore-viola {
+    color: #C34BDC;
+}
+
+

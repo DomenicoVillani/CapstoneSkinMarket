@@ -44,15 +44,14 @@ namespace CapstoneSkinMarket.Controllers
             return View(users);
         }
 
+
         // GET: Users/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Users/Create
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,Username,Nome,Cognome,Email,Password,DataNascita,CodFiscale,Telefono")] Users users)
@@ -72,6 +71,7 @@ namespace CapstoneSkinMarket.Controllers
                 {
                     db.Users.Add(users);
                     db.SaveChanges();
+                    TempData["message"] = "Utente registrato correttamente";
                     return RedirectToAction("Login", "Auth");
                 }
                 else

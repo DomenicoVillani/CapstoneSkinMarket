@@ -1,11 +1,17 @@
 ﻿﻿﻿@using CapstoneSkinMarket.Models
 @model Users
+<link href="~/Stile/Css/Login.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Login";
 }
-<h2 class="text-center my-4 pacifico-regular">Benvenuto da SkinBazaar!</h2>
-<h3 class="text-center my-4 pacifico-regular">Login</h3>
-<div class="d-flex justify-content-center pacifico-regular">
+
+
+
+
+<h2 class="text-center my-4">Benvenuto da SkinBazaar!</h2>
+<h3 class="text-center my-4">Il <span class="fst-italic">posto ideale</span> per le tue skin!</h3>
+<div class="d-flex justify-content-center">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -23,19 +29,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
-        <div class="mb-3">
+        <div class="mb-3 text-center colore-viola">
             @Html.LabelFor(model => model.Email, new { @class = "form-label" })
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 text-center colore-viola">
             @Html.LabelFor(model => model.Password, new { @class = "form-label" })
             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
         </div>
 
-        <button type="submit" class="btn btn-primary my-2">Login</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-viola my-2">Login</button>
+        </div>
 
-        <a href="@Url.Action("Create", "Users")" class="text-info d-block mt-3">Non sei ancora registrato?</a>
+
+        <a href="@Url.Action("Create", "Users")" class="register-link d-block mt-3">Non sei ancora registrato?</a>
 
     }
 </div>
