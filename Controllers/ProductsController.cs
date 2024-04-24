@@ -122,10 +122,18 @@ namespace CapstoneSkinMarket.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ArticoloID,Nome,Immagine,Descrizione,Prezzo,Rarita,GiocoID")] Products products)
+        public ActionResult Edit([Bind(Include = "ArticoloID,Nome,Descrizione,Prezzo,Rarita,GiocoID")] Products products, HttpPostedFileBase Immagine)
         {
             if (ModelState.IsValid)
             {
+                if (Immagine != null && Immagine.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(Immagine.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Stile/Img"), fileName);
+                    Immagine.SaveAs(path);
+                    products.Immagine = fileName;
+                }
+
                 db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -133,6 +141,7 @@ namespace CapstoneSkinMarket.Controllers
             ViewBag.GiocoID = new SelectList(db.Games, "GiocoID", "NomeGioco", products.GiocoID);
             return View(products);
         }
+
 
         // GET: Products/Delete/5
         [Authorize(Roles = "Admin")]

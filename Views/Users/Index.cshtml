@@ -1,85 +1,34 @@
 ﻿@model IEnumerable<CapstoneSkinMarket.Models.Users>
 
+<link href="~/Stile/Css/ListaClienti.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-center text-orange-h4 my-5">Tutti i nostri clienti</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cognome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataNascita)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CodFiscale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ruolo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProPic)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cognome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataNascita)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodFiscale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ruolo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProPic)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })|
-            @Html.ActionLink("Storico Acquisti", "Details", "Orders", new { id = item.UserID }, null)
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 sfondo-card">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong class="text-purple">@item.Username</strong></h5>
+                        <p class="card-text"><strong class="text-purple">Nome</strong>: @item.Nome</p>
+                        <p class="card-text"><strong class="text-purple">Cognome:</strong> @item.Cognome</p>
+                        <p class="card-text"><strong class="text-purple">Email:</strong> @item.Email</p>
+                        <p class="card-text"><strong class="text-purple">Ruolo:</strong> @item.Ruolo</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                @Html.ActionLink("Details", "Details", new { id = item.UserID }, new { @class = "btn btn-sm btn-viola" })
+                                @Html.ActionLink("Storico Acquisti", "Details", "Orders", new { id = item.UserID }, new { @class = "btn btn-sm btn-dettagli" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

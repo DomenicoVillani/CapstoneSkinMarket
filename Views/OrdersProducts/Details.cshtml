@@ -11,6 +11,7 @@
         <p><strong>Cognome:</strong> @Model[0].Orders.Users.Cognome</p>
         <p><strong>Email:</strong> @Model[0].Orders.Users.Email</p>
         <p><strong>Costo:</strong> @Model[0].Orders.TotalePrezzo</p>
+        <p><strong>Data acquisto:</strong> @Model[0].Orders.DataOrdine.ToString("dd/MM/yyyy")</p>
         <p><strong>Note:</strong> @Model[0].Orders.Note</p>
     </div>
     @if (Model.Any())
@@ -43,8 +44,18 @@
     {
         <div class="alert alert-warning">Nessun articolo trovato per questo ordine.</div>
     }
-    <div class="d-flex justify-content-center">
-        <p class="btn btn-viola">@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</p>
-    </div>
+    @if (User.IsInRole("User"))
+    {
+        <div class="d-flex justify-content-center">
+            <p class="btn btn-viola">@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</p>
+        </div>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="d-flex justify-content-center">
+            <p class="btn btn-viola">@Html.ActionLink("Ritorna alla lista di tutti gli ordini!", "Index", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</p>
+        </div>
+    }
+
 
 </div>

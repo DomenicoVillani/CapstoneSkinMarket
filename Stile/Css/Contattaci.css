@@ -1,0 +1,43 @@
+﻿body {
+    background-image: url('../img/test3.png');
+    background-repeat: repeat-y;
+    background-color: #252525;
+    color: #FDFBEA;
+    background-position: center top;
+    background-size: 100% auto;
+}
+
+.sfondo-card {
+    background-color: transparent;
+    color: #FDFBEA;
+    -webkit-box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.26);
+    -moz-box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.26);
+    box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.5);
+}
+
+.sfondo-card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.text-orange-p {
+    color: #F3700C;
+    font-weight: bold;
+}
+
+.text-purple-p {
+    color: #C34BDC;
+    font-weight: bold;
+}
+
+.btn-viola {
+    color: #FDFBEA; /* Colore del testo */
+    background-color: transparent; /* Sfondo trasparente inizialmente */
+    border-color: #C34BDC; /* Colore del bordo */
+}
+
+.btn-viola:hover {
+    background-color: #C34BDC; /* Colore di sfondo al hover */
+    border-color: #C34BDC; /* Colore del bordo al hover */
+}

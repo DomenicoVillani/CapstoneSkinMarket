@@ -1,29 +1,26 @@
 ﻿@model IEnumerable<CapstoneSkinMarket.Models.Orders>
 
+<link href="~/Stile/Css/OrderIndex.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-center text-purple-p mb-5">Storico acquisti totale</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-</p>
 
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-md-4">
-            <div class="card mb-4">
+            <div class="card mb-4 sfondo-card">
                 <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Users.Username)</h5>
+                    <h5 class="card-title"><strong>@Html.DisplayFor(modelItem => item.Users.Username)</strong></h5>
                     <p class="card-text"><strong>Total Price:</strong> @Html.DisplayFor(modelItem => item.TotalePrezzo)</p>
                     <p class="card-text"><strong>Note:</strong> @Html.DisplayFor(modelItem => item.Note)</p>
-                    <p class="card-text"><strong>Order Date:</strong> @Html.DisplayFor(modelItem => item.DataOrdine)</p>
-                    <div class="d-flex justify-content-between">
-                        <a href="@Url.Action("Edit", new { id=item.OrdineID })" class="btn btn-secondary">Edit</a>
-                        <a href="/OrdersProducts/Details/@item.OrdineID" class="btn btn-primary">Dettagli</a>
-                        <a href="@Url.Action("Delete", new { id=item.OrdineID })" class="btn btn-danger">Delete</a>
+                    <p class="card-text"><strong>Order Date:</strong> @item.DataOrdine.ToString("dd/MM/yyyy")</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="/OrdersProducts/Details/@item.OrdineID" class="btn btn-dettagli">Dettagli</a>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,14 @@
     </div>
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="@Url.Content(Model.Immagine)" class="img-fluid rounded-start" alt="Immagine del gioco" style="object-fit: cover; height: 100%;">
+            @if (Model.Immagine.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            {
+                <img class="card-img-top" src="@Model.Immagine" alt="Product Image">
+            }
+            else
+            {
+                <img class="card-img-top" src="@Url.Content("~/Stile/Img/" + Model.Immagine)" alt="Product Image">
+            }
         </div>
         <div class="col-md-6 offset-md-2">
             <div class="card-body">
@@ -25,10 +32,6 @@
         </div>
     </div>
     <div class="card-footer d-flex justify-content-center">
-        @if (User.IsInRole("Admin"))
-        {
-            <a class="btn btn-dettagli" href="@Url.Action("Edit", new { id = Model.ArticoloID })">Modifica prodotto</a>
-        }
         <a class="btn btn-viola" href="@Url.Action("Index")">Torna alla lista dei prodotti</a>
     </div>
 </div>

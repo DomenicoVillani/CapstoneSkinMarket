@@ -62,7 +62,6 @@
                                 <p class="card-text prezzo fw-bold">@Html.Raw(item.Prezzo.ToString("C"))</p>
                             </div>
                             <div class="d-flex justify-content-between flex-wrap">
-                                <a href="@Url.Action("Edit", "Products", new { id = item.ArticoloID })" class="btn btn-viola">Modifica</a>
                                 <a href="@Url.Action("Details", "Products", new { id = item.ArticoloID })" class="btn btn-dettagli">Dettagli</a>
                                 <a href="@Url.Action("Delete", "Products", new { id = item.ArticoloID })" class="btn btn-viola">Elimina</a>
                             </div>

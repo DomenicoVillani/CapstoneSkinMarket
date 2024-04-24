@@ -1,0 +1,45 @@
+﻿body {
+    background-image: url('../img/test3.png');
+    background-repeat: repeat-y;
+    background-color: #252525;
+    color: #FDFBEA;
+    background-position: center top;
+    background-size: 100% auto;
+}
+
+.sfondo-card {
+    background-color: transparent;
+    color: #FDFBEA;
+    -webkit-box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.26);
+    -moz-box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.26);
+    box-shadow: 10px 7px 12px 1px rgba(195,75,220,0.5);
+}
+
+.sfondo-card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.btn-dettagli {
+    color: #FDFBEA; /* Colore del testo */
+    background-color: transparent; /* Sfondo trasparente inizialmente */
+    border-color: #F3700C; /* Colore del bordo */
+}
+
+.btn-dettagli:hover {
+    background-color: #F3700C; /* Sfondo trasparente inizialmente */
+    border-color: #F3700C; /* Colore del bordo */
+}
+
+strong {
+    color: #F3700C;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.text-purple-p {
+    color: #C34BDC;
+    font-weight: bold;
+    font-size: 3em;
+}

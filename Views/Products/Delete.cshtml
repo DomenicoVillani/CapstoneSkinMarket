@@ -1,72 +1,41 @@
 ﻿@model CapstoneSkinMarket.Models.Products
 
+<link href="~/Stile/Css/ProductDelete.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h3 class="text-center text-orange-h4 mt-5">Sei sicuro di voler eliminare questo prodotto?</h3>
+<h3 class="text-center text-orange-h4 mb-5">E' un'azione irreversibile</h3>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Products</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Games.NomeGioco)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Games.NomeGioco)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Immagine)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Immagine)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Descrizione)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descrizione)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prezzo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rarita)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rarita)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+    <div class="card sfondo-card mb-5">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Url.Content(Model.Immagine)" class="img-fluid rounded-start" alt="Immagine del gioco" style="object-fit: cover; height: 100%;">
         </div>
-    }
+        <div class="col-md-6 offset-md-2">
+            <div class="card-body">
+                <h5 class="card-title font-size-title">@Html.DisplayFor(model => model.Games.NomeGioco)</h5>
+                <p class="card-text"><strong>Nome:</strong> @Html.DisplayFor(model => model.Nome)</p>
+                <p class="card-text"><strong>Descrizione:</strong> @Html.DisplayFor(model => model.Descrizione)</p>
+                <p class="card-text"><strong>Prezzo:</strong> @Html.DisplayFor(model => model.Prezzo)€</p>
+                <p class="card-text"><strong>Rarità:</strong> @Html.DisplayFor(model => model.Rarita)</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-viola" />
+            </div>
+        }
+    </div>
+</div>
+
+    
 </div>

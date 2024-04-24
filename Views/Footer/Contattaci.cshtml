@@ -1,29 +1,53 @@
 ﻿@model CapstoneSkinMarket.Models.EmailElastic
+
+<link href="~/Stile/Css/Contattaci.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Contattaci";
 }
 
-<h2>Contattaci</h2>
-<p>Hai domande, commenti o suggerimenti? Siamo qui per aiutarti! Utilizza i seguenti metodi per contattare il team di SkinBazaar.</p>
-
-<p>Scrivici a <a>email</a> e ti risponderemo il prima possibile.</p>
-<p>Telefona a <a>443434</a>durante gli orari di ufficio per assistenza immediata.</p>
-<p>Orari di Ufficio</p>
-<p>Il nostro team è disponibile per assisterti dal lunedì al venerdì, dalle 9:00 alle 18:00, orario del Mondo Virtuale (MV). Ti preghiamo di tenere presente che le richieste inviate al di fuori degli orari di ufficio potrebbero richiedere un po' più di tempo per ricevere una risposta.</p>
-
-@using (Html.BeginForm("SendEmail", "Footer", FormMethod.Post))
-{
-    <label for="EmailMittente">EmailMittente:</label>
-    <input type="text" id="EmailMittente" name="EmailMittente" required />
-
-    <label for="NomeCognome">Nome e Cognome:</label>
-    <input type="text" id="NomeCognome" name="NomeCognome" required />
-
-    <label for="Oggetto">Oggetto:</label>
-    <input type="text" id="Oggetto" name="Oggetto" required />
-
-    <label for="ContenutoEmail">Body:</label>
-    <textarea id="ContenutoEmail" name="ContenutoEmail" required></textarea>
-
-    <button type="submit">Send Email</button>
-}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="sfondo-card my-5 text-center">
+                <h2 class="text-orange-p">Contattaci</h2>
+                <p>Hai domande, commenti o suggerimenti? Siamo qui per aiutarti! <span class="text-purple-p">Utilizza i seguenti metodi</span> per contattare il team di SkinBazaar.</p>
+                <div class="d-flex flex-column flex-lg-row justify-content-center mt-5">
+                    <div class="me-5">
+                        <p><span class="text-purple-p">Scrivici a</span> <a href="mailto:skinbazaarclient@gmail.com">skinbazaarclient@gmail.com</a> e ti risponderemo il prima possibile.</p>
+                    </div>
+                    <div>
+                        <p><span class="text-purple-p">Telefona a </span><a href="tel:+393203571291">+39 320 357 1291</a> durante gli orari di ufficio per assistenza immediata.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sfondo-card my-5 text-center">
+                <p class="text-orange-p">Orari di Ufficio:</p>
+                <p>Il nostro team è <span class="text-purple-p">disponibile per assisterti dal lunedì al venerdì</span>, dalle 9:00 alle 18:00, orario del Mondo Virtuale (MV).</p>
+                <p>Ti preghiamo di tenere presente che le richieste inviate <span class="text-purple-p">al di fuori degli orari di ufficio</span> potrebbero richiedere un po' più di tempo per ricevere una risposta.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 offset-lg-2">
+            @using (Html.BeginForm("SendEmail", "Footer", FormMethod.Post, new { @class = "mt-5" }))
+            {
+                <div class="mb-3">
+                    <label for="EmailMittente" class="form-label">Email Mittente:</label>
+                    <input type="email" class="form-control" id="EmailMittente" name="EmailMittente" required>
+                </div>
+                <div class="mb-3">
+                    <label for="NomeCognome" class="form-label">Nome e Cognome:</label>
+                    <input type="text" class="form-control" id="NomeCognome" name="NomeCognome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Oggetto" class="form-label">Oggetto:</label>
+                    <input type="text" class="form-control" id="Oggetto" name="Oggetto" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ContenutoEmail" class="form-label">Testo messaggio:</label>
+                    <textarea class="form-control" id="ContenutoEmail" name="ContenutoEmail" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-viola">Invia email</button>
+            }
+        </div>
+    </div>
+</div>

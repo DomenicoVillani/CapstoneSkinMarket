@@ -1,22 +1,34 @@
-﻿
+﻿<link href="~/Stile/Css/DoveTrovarci.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "DoveTrovarci";
 }
 
-<h2>Dove Trovarci</h2>
 
-<p>Se desideri conoscere SkinBazaar di persona o hai bisogno di assistenza aggiuntiva, qui troverai tutte le informazioni necessarie per contattarci o trovarci fisicamente.</p>
-<h2>Indirizzo</h2>
-<p>
-    SkinBazaar Headquarters <br /> Via degli Sviluppatori, 123 <br /> Città dei Videogiochi, VG 00123 <br />Mondo Virtuale
-</p>
-
-<h2>Come Arrivare</h2>
-<p>Puoi raggiungere facilmente il nostro quartier generale utilizzando i seguenti metodi di trasporto:</p>
-<ul>
-    <li><span>Trasporto Pubblico:</span> Numerosi autobus e treni virtuali hanno fermate vicino al nostro ufficio. Controlla gli orari e le rotte sul sito ufficiale del trasporto pubblico del Mondo Virtuale.</li>
-    <li><span>Auto:</span> Se arrivi in auto, segui le indicazioni stradali verso la Città dei Videogiochi e cerca i cartelli che ti porteranno al nostro indirizzo.</li>
-    <li><span>Nave Aerea:</span> Se sei un avventuriero che preferisce volare, puoi atterrare al vicino Aeroporto Internazionale dei Videogiochi e prendere un taxi virtuale per raggiungerci.</li>
-</ul>
-
-<a href="@Url.Action("Contattaci", "Footer")">Contattaci</a>
+<div class="d-flex flex-column flex-xl-row">
+    <div class="me-5 mb-5">
+        <div class="sfondo-card mb-3">
+            <h2 class="text-orange-p">Dove Trovarci</h2>
+            <p>Se desideri <span class="text-purple-p">conoscere SkinBazaar</span> di persona o hai bisogno di assistenza aggiuntiva, qui troverai <span class="text-purple-p">tutte le informazioni necessarie</span> per contattarci o trovarci fisicamente.</p>
+        </div>
+        <div class="sfondo-card mb-3">
+            <h2 class="text-orange-p">Indirizzo</h2>
+            <p>
+                SkinBazaar Headquarters <br /> Via degli Sviluppatori, 123 <br /> Città dei Videogiochi, VG 00123 <br />Mondo Virtuale
+            </p>
+        </div>
+        <div class="sfondo-card mb-3">
+            <h2 class="text-orange-p">Come Arrivare</h2>
+            <p>Puoi raggiungere facilmente il nostro quartier generale utilizzando i seguenti metodi di trasporto:</p>
+            <ul>
+                <li><span class="text-purple-p">Trasporto Pubblico:</span> Numerosi autobus e treni virtuali hanno fermate vicino al nostro ufficio. Controlla gli orari e le rotte sul sito ufficiale del trasporto pubblico del Mondo Virtuale.</li>
+                <li><span class="text-purple-p">Auto:</span> Se arrivi in auto, segui le indicazioni stradali verso la Città dei Videogiochi e cerca i cartelli che ti porteranno al nostro indirizzo.</li>
+                <li><span class="text-purple-p">Nave Aerea:</span> Se sei un avventuriero che preferisce volare, puoi atterrare al vicino Aeroporto Internazionale dei Videogiochi e prendere un taxi virtuale per raggiungerci.</li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="d-none d-lg-block">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.8919618380337!2d12.39240843269173!3d43.10925716088084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132ea0812b39a1d5%3A0x71ece1c04fece1a6!2sPiazza%20IV%20Novembre!5e0!3m2!1sit!2sit!4v1713972630210!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>

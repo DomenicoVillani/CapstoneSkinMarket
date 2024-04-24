@@ -1,55 +1,53 @@
 ﻿@model CapstoneSkinMarket.Models.Products
 
+<link href="~/Stile/Css/CreateProducts.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
-
 
 @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Products</h4>
-    <hr />
+    <h4 class="text-purple-p text-center my-5">Aggiungi un nuovo prodotto!</h4>
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-        </div>
+    <div class="form-group mt-3">
+        <div class="d-flex justify-content-center">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Immagine, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="form-group mt-3">
+        <div class="d-flex justify-content-center">
+            @Html.LabelFor(model => model.Immagine, htmlAttributes: new { @class = "control-label col-md-2" })
             <input type="file" name="Immagine" class="form-control" />
             @Html.ValidationMessageFor(model => model.Immagine, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Descrizione, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="form-group mt-3">
+        <div class="d-flex justify-content-center">
+            @Html.LabelFor(model => model.Descrizione, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.Descrizione, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Descrizione, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Prezzo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="form-group mt-3">
+        <div class="d-flex justify-content-center">
+            @Html.LabelFor(model => model.Prezzo, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.Prezzo, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Prezzo, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Rarita, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="form-group mt-3">
+        <div class="d-flex justify-content-center">
+            <p class="control-label col-md-2">Rarità</p>
             @{
                 var raritaOptions = new List<string>
             {
@@ -68,25 +66,22 @@
 
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.GiocoID, "GiocoID", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="form-group mt-3">
+        <div class="d-flex justify-content-center">
+            <p class="control-label col-md-2">Gioco</p>
             @Html.DropDownList("GiocoID", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.GiocoID, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="d-flex justify-content-center mt-5">
+            <input type="submit" value="Create" class="btn btn-dettagli" />
         </div>
     </div>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
