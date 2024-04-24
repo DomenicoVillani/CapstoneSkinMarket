@@ -32,7 +32,4 @@ Per eseguire il progetto in locale:
 3. Configura le connessioni al database nel file di configurazione dell'applicazione.
 4. Avvia l'applicazione e accedi utilizzando le credenziali di amministratore predefinite (se presenti).
 
-## Informazioni Aggiuntive
-
-Sentiti libero di esplorare il codice sorgente e contribuire al progetto. Se incontri problemi o hai domande, non esitare a contattare i manutentori del progetto aprendo una issue.
 
