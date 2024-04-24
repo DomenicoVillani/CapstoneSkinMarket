@@ -1,49 +1,50 @@
 ﻿@model List<CapstoneSkinMarket.Models.OrdersProducts>
-
+<link href="~/Stile/Css/DettaglioOrdine.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-<div>
-    <p>Nome @Model[0].Orders.Users.Nome</p>
-    <p>Cognome @Model[0].Orders.Users.Cognome</p>
-    <p>Email @Model[0].Orders.Users.Email</p>
-    <p>Costo @Model[0].Orders.TotalePrezzo</p>
-    <p>Note @Model[0].Orders.Note</p>
-</div>
-@if (Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Articolo</th>
-                <th>Quantità</th>
-                <th>Prezzo</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Dettaglio ordine</h2>
+    <div class="card p-3 sfondo-card">
+        <p><strong>Nome:</strong> @Model[0].Orders.Users.Nome</p>
+        <p><strong>Cognome:</strong> @Model[0].Orders.Users.Cognome</p>
+        <p><strong>Email:</strong> @Model[0].Orders.Users.Email</p>
+        <p><strong>Costo:</strong> @Model[0].Orders.TotalePrezzo</p>
+        <p><strong>Note:</strong> @Model[0].Orders.Note</p>
+    </div>
+    @if (Model.Any())
+    {
+        <table class="table table-hover mt-4">
+            <thead class="thead-dark">
                 <tr>
-                    <td>@item.Products.Nome</td>
-                    <td>@item.Quantita</td>
-                    <td>@item.Products.Prezzo</td>
+                    <th>Articolo</th>
+                    <th>Quantità</th>
+                    <th>Prezzo</th>
                 </tr>
-            }
-            <tr>
-                <td colspan="2">Prezzo totale: </td>
-                <td>
-                    @Model.Sum(item => (item.Products.Prezzo * item.Quantita))
-                </td>
-            </tr>
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Nessun articolo trovato per questo ordine.</p>
-}
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Products.Nome</td>
+                        <td>@item.Quantita</td>
+                        <td>@item.Products.Prezzo.ToString("C")</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="2"><strong>Prezzo totale:</strong></td>
+                    <td><strong>@Model.Sum(item => (item.Products.Prezzo * item.Quantita)).ToString("C")</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning">Nessun articolo trovato per questo ordine.</div>
+    }
+    <div class="d-flex justify-content-center">
+        <p class="btn btn-viola">@Html.ActionLink("I tuoi ordini!", "Details", "Orders", new { id = User.Identity.Name }, new { @class = "nav-link" })</p>
+    </div>
+
+</div>

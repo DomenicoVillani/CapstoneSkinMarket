@@ -21,14 +21,25 @@ namespace CapstoneSkinMarket.Models
 
         public decimal TotalePrezzo { get; set; }
 
-        [StringLength(255)]
+        [StringLength(255, ErrorMessage = "Le note non possono superare i 255 caratteri.")]
         public string Note { get; set; }
 
         public DateTime DataOrdine { get; set; }
 
+        [Required(ErrorMessage = "Il nome è obbligatorio.")]
+        [StringLength(255, ErrorMessage = "Il nome non può superare i 255 caratteri.")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Il cognome è obbligatorio.")]
+        [StringLength(255, ErrorMessage = "Il cognome non può superare i 255 caratteri.")]
         public string Cognome { get; set; }
+
+        [Required(ErrorMessage = "L'indirizzo di casa è obbligatorio.")]
+        [StringLength(255, ErrorMessage = "L'indirizzo di casa non può superare i 255 caratteri.")]
         public string IndirizzoCasa { get; set; }
+
+        [Required(ErrorMessage = "L'indirizzo di fatturazione è obbligatorio.")]
+        [StringLength(255, ErrorMessage = "L'indirizzo di fatturazione non può superare i 255 caratteri.")]
         public string IndirizzoFatturazione { get; set; }
         public int PagamentoID { get; set; }
 

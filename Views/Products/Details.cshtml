@@ -1,62 +1,34 @@
 ﻿@model CapstoneSkinMarket.Models.Products
 
+<link href="~/Stile/Css/DettaglioProdotto.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div class="card">
+<div class="card sfondo-card mb-5">
     <div class="card-header">
-        <h4>Product Details</h4>
+        <h4 class="text-orange-h4 text-center">Dettaglio prodotto</h4>
     </div>
-    <div class="card-body">
-        <dl class="row">
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Games.NomeGioco)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Games.NomeGioco)
-            </dd>
-
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Nome)
-            </dd>
-
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Immagine)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Immagine)
-            </dd>
-
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Descrizione)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Descrizione)
-            </dd>
-
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Prezzo)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Prezzo)
-            </dd>
-
-            <dt class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Rarita)
-            </dt>
-            <dd class="col-sm-9">
-                @Html.DisplayFor(model => model.Rarita)
-            </dd>
-        </dl>
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Url.Content(Model.Immagine)" class="img-fluid rounded-start" alt="Immagine del gioco" style="object-fit: cover; height: 100%;">
+        </div>
+        <div class="col-md-6 offset-md-2">
+            <div class="card-body">
+                <h5 class="card-title font-size-title">@Html.DisplayFor(model => model.Games.NomeGioco)</h5>
+                <p class="card-text"><strong>Nome:</strong> @Html.DisplayFor(model => model.Nome)</p>
+                <p class="card-text"><strong>Descrizione:</strong> @Html.DisplayFor(model => model.Descrizione)</p>
+                <p class="card-text"><strong>Prezzo:</strong> @Html.DisplayFor(model => model.Prezzo)€</p>
+                <p class="card-text"><strong>Rarità:</strong> @Html.DisplayFor(model => model.Rarita)</p>
+            </div>
+        </div>
     </div>
-    <div class="card-footer">
-        <a class="btn btn-primary" href="@Url.Action("Edit", new { id = Model.ArticoloID })">Edit</a>
-        <a class="btn btn-secondary" href="@Url.Action("Index")">Back to List</a>
+    <div class="card-footer d-flex justify-content-center">
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-dettagli" href="@Url.Action("Edit", new { id = Model.ArticoloID })">Modifica prodotto</a>
+        }
+        <a class="btn btn-viola" href="@Url.Action("Index")">Torna alla lista dei prodotti</a>
     </div>
 </div>

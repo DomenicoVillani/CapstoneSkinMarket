@@ -1,4 +1,7 @@
 ﻿@model CapstoneSkinMarket.Models.Orders
+
+<link href="~/Stile/Css/Carrello.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Carrello";
 }
@@ -21,23 +24,23 @@
                 @foreach (var item in ViewBag.UserCart)
                 {
                     <div class="col-md-4 mb-4">
-                        <div class="card h-100">
+                        <div class="card h-100 sfondo-card">
                             <img src="@item.Products.Immagine" class="card-img-top" alt="Immagine skin">
                             <div class="card-body">
                                 <h5 class="card-title">@item.Products.Nome</h5>
-                                <p class="card-text">Prezzo: @item.Products.Prezzo €</p>
+                                <p class="card-text text-orange-price">Prezzo: @item.Products.Prezzo €</p>
                                 <p class="card-text">Rarità: @item.Products.Rarita</p>
                                 <form method="post" action="@Url.Action("AggiornaQuantita", "OrdersProducts")">
                                     <input type="hidden" name="id" value="@item.Products.ArticoloID" />
                                     <div class="btn-group" role="group" aria-label="Quantità">
-                                        <button type="submit" name="operazione" value="decrementa" class="btn btn-outline-primary">-</button>
-                                        <span class="btn btn-outline-secondary">@item.Quantita</span>
-                                        <button type="submit" name="operazione" value="incrementa" class="btn btn-outline-primary">+</button>
+                                        <button type="submit" name="operazione" value="decrementa" class="btn btn-viola">-</button>
+                                        <span class="btn btn-dettagli">@item.Quantita</span>
+                                        <button type="submit" name="operazione" value="incrementa" class="btn btn-viola">+</button>
                                     </div>
                                 </form>
                                 <form method="post" action="@Url.Action("RimuoviDallCarrello", "OrdersProducts")">
                                     <input type="hidden" name="articoloId" value="@item.Products.ArticoloID" />
-                                    <button type="submit" class="btn btn-danger mt-2">Rimuovi</button>
+                                    <button type="submit" class="btn btn-dettagli mt-2">Rimuovi</button>
                                 </form>
                             </div>
                         </div>
@@ -52,28 +55,32 @@
                     <div class="form-group">
                         <label for="note">Note:</label>
                         <textarea class="form-control" id="note" name="Note" rows="3"></textarea>
+                        @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Nome)
                         @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Cognome)
                         @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Cognome, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.IndirizzoCasa)
+                        Indirizzo di casa:
                         @Html.EditorFor(model => model.IndirizzoCasa, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IndirizzoCasa, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.IndirizzoFatturazione)
+                        Indirizzo di fatturazione:
                         @Html.EditorFor(model => model.IndirizzoFatturazione, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IndirizzoFatturazione, "", new { @class = "text-danger" })
                     </div>
                     @if (ViewBag.PagamentoID != null)
                     {
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Pagamento.PagamentoID, "Metodo di Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            Metodo di pagamento<div class="col-md-10">
                                 @Html.DropDownList("PagamentoID", null, htmlAttributes: new { @class = "form-control", id = "metodoPagamento" })
                                 @Html.ValidationMessageFor(model => model.Pagamento.PagamentoID, "", new { @class = "text-danger" })
                             </div>
@@ -102,11 +109,11 @@
                     <input type="hidden" name="TotalePrezzo" value="0" />
                     <input type="hidden" name="DataOrdine" value="@DateTime.Today.ToShortDateString()" />
                     <div class="d-flex mt-3">
-                        <button type="submit" class="btn btn-success">Conferma Ordine</button>
+                        <button type="submit" class="btn btn-viola">Conferma Ordine</button>
                     </div>
                 </form>
                 <form method="post" action="@Url.Action("SvuotaCarrello", "OrdersProducts")">
-                    <input type="submit" value="Svuota carrello" class="btn btn-danger mb-4" />
+                    <input type="submit" value="Svuota carrello" class="btn btn-dettagli mb-4" />
                 </form>
             </div>
         </div>

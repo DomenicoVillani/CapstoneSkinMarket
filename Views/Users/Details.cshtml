@@ -1,75 +1,47 @@
 ﻿@model CapstoneSkinMarket.Models.Users
 
+<link href="~/Stile/Css/DettaglioProfilo.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Details";
 }
 
-<div class="container mt-4">
-    <div class="card">
+<div class="container mt-5 mb-5">
+    <div class="card sfondo-card">
         <div class="card-header">
-            <h2>Details - @Html.DisplayFor(model => model.Username)</h2>
+            <h2 class="text-center text-orange-h4">Dettaglio profilo @Html.DisplayFor(model => model.Username)</h2>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="@Url.Content("~/Stile/Img/Propic/" + Model.ProPic)" class="img-thumbnail" alt="Profile Picture" />
+                    <img src="@Url.Content("~/Stile/Img/Propic/" + Model.ProPic)" class="img-fluid" alt="Profile Picture" style="object-fit: cover; height: 100%;" />
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7 offset-md-1">
                     <dl class="row">
-                        <dt class="col-sm-3">
-                            Nome:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Nome)
-                        </dd>
+                        <dt class="col-sm-3 text-purple">Nome:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nome)</dd>
 
-                        <dt class="col-sm-3">
-                            Cognome:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Cognome)
-                        </dd>
+                        <dt class="col-sm-3 text-purple">Cognome:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Cognome)</dd>
 
-                        <dt class="col-sm-3">
-                            Email:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Email)
-                        </dd>
+                        <dt class="col-sm-3 text-purple">Email:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
 
-                        <dt class="col-sm-3">
-                            Data Nascita:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.DataNascita)
-                        </dd>
+                        <dt class="col-sm-3 text-purple">Data Nascita:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.DataNascita)</dd>
 
-                        <dt class="col-sm-3">
-                            Codice Fiscale:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.CodFiscale)
-                        </dd>
+                        <dt class="col-sm-3 text-purple">Codice Fiscale:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.CodFiscale)</dd>
 
-                        <dt class="col-sm-3">
-                            Telefono:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Telefono)
-                        </dd>
+                        <dt class="col-sm-3 text-purple">Telefono:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
 
-                        <dt class="col-sm-3">
-                            Ruolo:
-                        </dt>
-                        <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.Ruolo)
-                        </dd>
                     </dl>
                 </div>
             </div>
         </div>
-        <div class="card-footer text-muted">
-            <a href="@Url.Action("Edit", "Users", new { id = Model.UserID })" class="btn btn-primary">Edit</a>
+        <div class="card-footer text-muted d-flex justify-content-center">
+            <a href="@Url.Action("Edit", "Users", new { id = Model.UserID })" class="btn btn-viola">Modifica profilo</a>
         </div>
     </div>
 </div>
