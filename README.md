@@ -33,3 +33,8 @@ Per eseguire il progetto in locale:
 4. Avvia l'applicazione e accedi utilizzando le credenziali di amministratore predefinite (se presenti).
 
 
+## Contattami
+
+Puoi contattarmi tramite il mio profilo LinkedIn:
+
+[LinkedIn - Domenico Villani](https://www.linkedin.com/in/domenicovillani99/)
