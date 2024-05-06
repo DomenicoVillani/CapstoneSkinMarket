@@ -1,6 +1,6 @@
-# SkinBaazar
+# SkinBazaar
 
-SkinBaazar è un'applicazione web sviluppata utilizzando il framework ASP.NET MVC (Model-View-Controller), con Entity Framework per la gestione dei dati e SQL Server come database di backend. Il sito è progettato per fornire agli utenti un'esperienza intuitiva per la navigazione, l'acquisto e la gestione delle skin per vari prodotti.
+SkinBazaar è un'applicazione web sviluppata utilizzando il framework ASP.NET MVC (Model-View-Controller), con Entity Framework per la gestione dei dati e SQL Server come database di backend. Il sito è progettato per fornire agli utenti un'esperienza intuitiva per la navigazione, l'acquisto e la gestione delle skin per vari prodotti.
 
 ## Tecnologie Utilizzate
 
